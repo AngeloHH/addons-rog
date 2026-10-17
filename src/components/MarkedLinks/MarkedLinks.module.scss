@@ -1,0 +1,118 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  @include surfaces.panel;
+}
+
+.title {
+  @include typography.kicker;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  // Give unboxed text rows more breathing room.
+  &[data-boxed='false'] {
+    gap: 10px;
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  background: tokens.$bg-page;
+  border: 1px solid #2a2114;
+  color: tokens.$text-secondary;
+  font-size: 13px;
+  text-decoration: none;
+
+  [data-boxed='false'] & {
+    align-items: flex-start;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: #cdbd99;
+    line-height: 1.5;
+  }
+
+  // Apply hover feedback only to rows that navigate somewhere.
+  &[data-link='true']:hover {
+    border-color: tokens.$accent;
+    color: tokens.$text-hover;
+  }
+
+  // Keep unfinished entries muted.
+  &[data-muted='true'] {
+    color: tokens.$border-frame-outer;
+  }
+}
+
+// =============================================================================
+// ICON MARKERS
+// =============================================================================
+
+// Position the supplied icon in place of the diamond.
+
+.mark {
+  display: flex;
+  width: 16px;
+  flex: 0 0 auto;
+  color: var(--tone-accent, tokens.$accent);
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  [data-boxed='false'] & {
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+.diamond {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  background: var(--tone-background, #3a2a10);
+  border: 1px solid var(--tone-accent, tokens.$accent);
+  transform: rotate(45deg);
+
+  // Align the marker with the first text line in unboxed rows.
+  [data-boxed='false'] & {
+    margin-top: 6px;
+  }
+}
+
+.trailing {
+  color: tokens.$text-muted;
+}
+
+.footerLink {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #6b5527;
+  color: tokens.$link;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}

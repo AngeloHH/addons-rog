@@ -1,0 +1,97 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/layout';
+
+.authBar {
+  background: #080706;
+  border-bottom: 1px solid #2a2114;
+}
+
+.inner {
+  @include layout.centered;
+  padding: 6px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: tokens.$text-subtle;
+  font-size: 13px;
+}
+
+.community {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.accountLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  a,
+  button {
+    color: #c9b27f;
+    font: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    background: transparent;
+    border: 1px solid #4a3a1c;
+    padding: 3px 8px;
+    cursor: pointer;
+  }
+  align-items: center;
+  gap: 14px;
+}
+
+.signIn,
+.createAccount {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+.signIn {
+  color: #c9b27f;
+}
+
+.separator {
+  color: #3a2f1e;
+}
+
+.createAccount {
+  color: tokens.$link;
+  font-weight: 600;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #c9b27f;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+.backIcon {
+  display: flex;
+  color: tokens.$accent-muted;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .inner {
+    flex-wrap: wrap;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}

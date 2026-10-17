@@ -1,0 +1,134 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/layout';
+@use '../../styles/base/typography';
+
+// =============================================================================
+// HOME ALERT SPACING
+// =============================================================================
+
+// Inset top-level alerts while preserving the data sections' existing spacing.
+
+.content > :global(.api-state[role='alert']) {
+  @include layout.alert-inset;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .content > :global(.api-state[role='alert']) {
+    width: calc(100% - 32px);
+  }
+}
+
+.latestSection {
+  @include layout.container;
+  padding: 64px 24px 24px;
+}
+
+.updatedList {
+  margin-top: 42px;
+}
+
+.expansionsSection {
+  @include layout.container;
+  padding: 72px 24px 24px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.sectionKicker {
+  margin-bottom: 8px;
+  @include typography.kicker;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 32px;
+  font-weight: 400;
+  text-shadow: 0 2px 0 #000;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.sectionIntro {
+  margin: 0;
+  max-width: 420px;
+  color: tokens.$text-subtle;
+  font-size: 15px;
+  text-wrap: pretty;
+}
+
+.packsSection {
+  @include layout.container;
+  padding: 56px 24px 24px;
+}
+
+.ctaSection {
+  @include layout.container;
+  padding: 56px 24px 24px;
+}
+
+.requestsSection {
+  @include layout.container;
+  padding: 56px 24px 80px;
+}
+
+.requestsLink {
+  padding-bottom: 2px;
+  border-bottom: 1px solid #6b5527;
+  color: tokens.$link;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.requestsLinkArrow {
+  flex: 0 0 auto;
+  display: inline-block;
+  margin-left: 4px;
+  vertical-align: -2px;
+}
+
+.requestsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+}
+
+.requestsList {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .packsSection {
+    @include layout.container;
+    padding: 56px 24px 24px;
+  }
+
+  .requestsSection {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .requestsGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .expansionsSection {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .latestSection {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}

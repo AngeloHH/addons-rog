@@ -1,0 +1,43 @@
+@use '../../styles/base/tokens';
+
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bar {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.label {
+  min-width: 0;
+}
+
+.track {
+  height: 5px;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-panel;
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  background: var(--bar-accent, tokens.$accent);
+}
+
+.value {
+  color: tokens.$text-secondary;
+  font-family: tokens.$font-serif;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .bar {
+    grid-template-columns: 90px minmax(0, 1fr) auto;
+  }
+}

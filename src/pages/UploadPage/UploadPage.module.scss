@@ -1,0 +1,955 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/layout';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+@use '../../styles/components/forms';
+
+.page {
+  display: contents;
+}
+
+// =============================================================================
+// UPLOAD ALERT SPACING
+// =============================================================================
+
+// Inset access notices and top-level errors without changing the form layout.
+
+.page > :global(.api-state[role='alert']),
+.content > :global(.api-state[role='alert']) {
+  @include layout.alert-inset;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .page > :global(.api-state[role='alert']),
+  .content > :global(.api-state[role='alert']) {
+    width: calc(100% - 32px);
+  }
+}
+
+.uploader {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.uploaderLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 6px;
+  color: tokens.$text-secondary;
+  font-weight: 600;
+  text-decoration: none;
+
+  @include surfaces.control;
+}
+
+.uploaderInitial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: #3a2a10;
+  border: 1px solid tokens.$border-panel;
+  color: tokens.$accent;
+  font-family: tokens.$font-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.layout {
+  @include layout.container;
+  padding: 36px 24px 80px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+  gap: 36px;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 0;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px;
+  @include surfaces.panel;
+}
+
+.stepHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  background: linear-gradient(180deg, #2a2620, #0f0d0a);
+  border: 1px solid tokens.$border-control;
+  box-shadow: 0 0 0 1px #15120e;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.stepText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.stepTitle {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 22px;
+  font-weight: 400;
+  text-shadow: 0 1px 0 #000;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.stepSubtitle {
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+// =============================================================================
+// STEP 1 - ARCHIVE UPLOAD
+// =============================================================================
+
+// Display the dashed drop zone and the selected archive card.
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 190px;
+  padding: 24px;
+  background: linear-gradient(180deg, #1b150c, #120e08);
+  border: 1px dashed tokens.$border-frame-outer;
+  cursor: pointer;
+  font: inherit;
+  text-align: center;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+
+  &:hover {
+    background: linear-gradient(180deg, #221a0f, #17120b);
+    border-color: tokens.$accent;
+  }
+}
+
+.dropIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  color: #d9bd72;
+
+  @include surfaces.control;
+}
+
+.dropTitle {
+  color: tokens.$text-strong;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.dropNote {
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.fileCard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 18px;
+  background: linear-gradient(180deg, #1b150c, #120e08);
+  border: 1px solid tokens.$border-frame-outer;
+}
+
+.fileHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.fileKind {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  background: #3a2a10;
+  border: 1px solid tokens.$border-panel;
+  color: tokens.$accent;
+  font-family: tokens.$font-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.fileText {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.fileName {
+  overflow: hidden;
+  color: tokens.$text-strong;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileMeta {
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.fileChange {
+  padding: 8px 14px;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  @include surfaces.control;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progressHead {
+  display: flex;
+  justify-content: space-between;
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.bar {
+  height: 6px;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-panel;
+}
+
+.barFill {
+  height: 100%;
+  background: linear-gradient(90deg, #8e6520, #e0bb62);
+  transition: width 0.3s ease;
+}
+
+.folders {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #2a2114;
+}
+
+.folderList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.folder {
+  padding: 4px 9px;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-panel;
+  color: tokens.$text-secondary;
+  font-size: 12px;
+}
+
+.folderNote {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: tokens.$success;
+  font-size: 12px;
+}
+
+// =============================================================================
+// STEPS 2 AND 3 - ADDON DETAILS
+// =============================================================================
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 16px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 14px;
+}
+
+.label {
+  min-width: 0;
+  @include forms.label;
+
+  &[data-wide='true'] {
+    grid-column: 1 / -1;
+  }
+}
+
+.labelRow {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hintText {
+  color: tokens.$text-muted;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.warning {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: tokens.$warning;
+  font-weight: 400;
+}
+
+.warningLink {
+  color: tokens.$link;
+  text-decoration: none;
+
+  svg {
+    display: inline-block;
+    vertical-align: -2px;
+  }
+}
+
+.field,
+.textarea {
+  min-width: 0;
+  width: 100%;
+  color: tokens.$text-input;
+  color-scheme: dark;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+
+  @include surfaces.control;
+}
+
+.field {
+  min-height: 44px;
+  padding: 0 14px;
+}
+
+.textarea {
+  padding: 12px 14px;
+  font-family: inherit;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.roles {
+  display: flex;
+  gap: 6px;
+}
+
+.role {
+  flex: 1;
+  min-height: 44px;
+  background: linear-gradient(180deg, rgba(40, 36, 30, 0.85), rgba(14, 12, 9, 0.9));
+  border: 1px solid tokens.$border-control;
+  box-shadow: 0 0 0 1px #15120e;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+
+  &[data-selected='true'] {
+    background: linear-gradient(180deg, #f1d68a, #b8892f);
+    border-color: #2a2118;
+    color: #231806;
+  }
+}
+
+.media {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 120px;
+  height: 120px;
+  @include surfaces.framed;
+  color: tokens.$text-muted;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  text-align: center;
+
+  svg {
+    color: #d9bd72;
+  }
+}
+
+.shots {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.shotGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.shot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(160deg, #16110a, tokens.$bg-page);
+  border: 1px dashed tokens.$border-frame-outer;
+  color: tokens.$text-muted;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+
+  svg {
+    color: #d9bd72;
+  }
+
+  &:hover {
+    border-color: tokens.$accent;
+    color: tokens.$text-secondary;
+  }
+}
+
+// =============================================================================
+// STEP 4 - CONFIRMATION AND SUBMISSION
+// =============================================================================
+
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.check {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.checkInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.checkBox {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  flex: 0 0 auto;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-control;
+  box-shadow: 0 0 0 1px #15120e;
+
+  .checkInput:checked + & {
+    background: linear-gradient(180deg, #f1d68a, #b8892f);
+  }
+
+  .checkInput:focus-visible + & {
+    border-color: tokens.$accent;
+  }
+}
+
+.submitRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 4px;
+  padding-top: 20px;
+  border-top: 1px solid tokens.$border-divider;
+}
+
+.ready {
+  color: tokens.$text-muted;
+  font-size: 13px;
+
+  &[data-ready='true'] {
+    color: tokens.$success;
+  }
+}
+
+.submitActions {
+  display: flex;
+  gap: 10px;
+}
+
+.draft {
+  padding: 12px 20px;
+  color: #e8d39a;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  @include surfaces.control;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+}
+
+.submit {
+  padding: 12px 26px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 15px;
+
+  @include buttons.gold;
+
+  &[data-ready='false'] {
+    opacity: 0.55;
+  }
+}
+
+// =============================================================================
+// UPLOAD SIDEBAR
+// =============================================================================
+
+.aside {
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.previewPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  @include surfaces.framed;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  @include surfaces.panel;
+}
+
+.panelKicker {
+  @include typography.kicker;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: linear-gradient(180deg, #16110a, tokens.$bg-panel);
+  border: 1px solid tokens.$border-panel;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.cardInitial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  background: #3a2a10;
+  border: 1px solid tokens.$border-panel;
+  color: tokens.$accent;
+  font-family: tokens.$font-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cardName {
+  overflow: hidden;
+  color: tokens.$text-strong;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cardMeta {
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.cardShort {
+  margin: 0;
+  color: #bfae88;
+  font-size: 13px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.cardFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid tokens.$border-divider;
+  color: tokens.$text-subtle;
+  font-size: 12px;
+}
+
+.cardStats {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cardStars {
+  display: inline-flex;
+  gap: 1px;
+  color: tokens.$link;
+}
+
+.cardDownload {
+  padding: 5px 10px;
+  font-size: 12px;
+
+  @include buttons.gold;
+}
+
+.reviewText {
+  margin: 0;
+  color: #cdbd99;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.reviewTime {
+  color: tokens.$text-heading;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .aside {
+    position: static;
+  }
+
+  .media {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .uploader {
+    justify-content: flex-start;
+  }
+}
+
+.formFieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.submissionBar {
+  @include layout.container;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 24px 0;
+}
+
+.submissionStatus {
+  margin: 0;
+  color: tokens.$text-secondary;
+  overflow-wrap: anywhere;
+}
+
+.submissions {
+  @include layout.container;
+  padding: 0 24px 64px;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  :global(.api-pagination) button {
+    @include surfaces.control;
+    color: tokens.$text-secondary;
+    cursor: pointer;
+    font: inherit;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}
+
+.submissionItem {
+  @include surfaces.panel;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 20px;
+  margin-top: 10px;
+  padding: 14px 18px;
+  color: tokens.$text-muted;
+  overflow-wrap: anywhere;
+
+  a {
+    min-width: 0;
+    color: tokens.$link;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .submissionBar,
+  .submissions {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .step {
+    padding: 24px;
+  }
+
+  .submitActions,
+  .fileHead {
+    flex-wrap: wrap;
+  }
+
+  .submitActions {
+    width: 100%;
+
+    button {
+      flex: 1 1 auto;
+    }
+  }
+}
+
+.intro {
+  padding: 48px 24px 36px;
+  @include surfaces.hero;
+}
+
+.introInner {
+  @include layout.centered;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: end;
+}
+
+.introContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 680px;
+}
+
+.introKicker {
+  @include typography.kicker;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  span {
+    width: 28px;
+    height: 1px;
+    background: tokens.$accent;
+  }
+}
+
+.introTitle {
+  margin: 0;
+  font-family: tokens.$font-display;
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: tokens.$text-heading;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+  text-shadow:
+    0 2px 0 #000,
+    0 3px 8px rgba(0, 0, 0, 0.6);
+  text-wrap: balance;
+}
+
+.introText {
+  margin: 0;
+  color: #bfae88;
+  font-size: 16px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.authorRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 16px;
+  margin-top: 2px;
+  padding-top: 20px;
+  border-top: 1px solid tokens.$border-divider;
+}
+
+.labelStack,
+.iconGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.iconGroup {
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.shotPreview {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  min-width: 0;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-frame-outer;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.removeMedia {
+  @include surfaces.control;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: flex;
+  padding: 5px;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+}
+
+.icon,
+.shot,
+.removeMedia,
+.fileChange {
+  &:focus-visible {
+    outline: 2px solid tokens.$text-hover;
+    outline-offset: 4px;
+  }
+}
+
+.field::placeholder,
+.textarea::placeholder {
+  color: #8a7a5a;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .introInner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .introTitle {
+    font-size: 30px;
+  }
+
+  .layout {
+    gap: 18px;
+  }
+}

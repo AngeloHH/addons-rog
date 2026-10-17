@@ -1,0 +1,34 @@
+{
+  "name": "addons-rog",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "setup:check": "node scripts/setup.mjs --check",
+    "dev": "concurrently -k -n react,php -c cyan,magenta \"vite\" \"node scripts/start-php.mjs\"",
+    "build": "vite build && node scripts/copy-api.mjs",
+    "preview": "concurrently -k -n preview,php -c cyan,magenta \"vite preview\" \"node scripts/start-php.mjs\"",
+    "fixtures:addons": "node scripts/generate-addons.mjs",
+    "test:build": "node --test scripts/tests/build-package.test.mjs",
+    "test:client": "node --test scripts/tests/api-client.test.mjs",
+    "test:frontend": "node scripts/tests/frontend-integration.mjs",
+    "test:installation": "node scripts/tests/installation-gate.mjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.3",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.18.4",
+    "remark-gfm": "^4.0.1",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.7"
+  },
+  "devDependencies": {
+    "@playwright/browser-chromium": "^1.64.1",
+    "concurrently": "^9.2.1",
+    "playwright-core": "^1.64.1",
+    "sass": "^1.105.0"
+  }
+}

@@ -1,0 +1,112 @@
+@use '../../styles/base/tokens';
+@use '../../styles/components/buttons';
+
+.row {
+  display: grid;
+  // Fix the icon and name columns; create other columns only for rendered cells.
+  grid-template-columns: 40px minmax(0, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, auto);
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid tokens.$border-divider;
+  transition: background 0.2s;
+
+  &:last-child {
+    border-bottom-color: transparent;
+  }
+
+  &:hover {
+    background: #171208;
+  }
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  overflow: hidden;
+  color: tokens.$text-strong;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+.meta {
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.version {
+  overflow: hidden;
+  color: tokens.$text-subtle;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.expansionBadge {
+  padding: 3px 7px;
+  border: 1px solid var(--expansion-accent);
+  color: var(--expansion-accent);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: tokens.$link;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.statsSeparator {
+  color: tokens.$border-frame-outer;
+}
+
+.downloads {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: tokens.$text-subtle;
+}
+
+.downloadButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  @include buttons.gold;
+  font-size: 12px;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .version,
+  .expansionBadge,
+  .stats {
+    display: none;
+  }
+}

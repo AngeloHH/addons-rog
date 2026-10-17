@@ -1,0 +1,99 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+
+.accountIntro {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @include typography.kicker;
+}
+
+.kickerLine {
+  width: 28px;
+  height: 1px;
+  background: tokens.$accent;
+}
+
+.title {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1.08;
+  text-shadow:
+    0 2px 0 #000,
+    0 3px 8px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  text-wrap: balance;
+  word-spacing: 0.3em;
+}
+
+.desktopOnly {
+  display: contents;
+}
+
+.benefits {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #d9c9a5;
+  font-size: 16px;
+  line-height: 1.5;
+  list-style: none;
+}
+
+.benefits li {
+  display: flex;
+  gap: 12px;
+}
+
+.bullet {
+  width: 8px;
+  height: 8px;
+  margin-top: 8px;
+  flex: 0 0 auto;
+  background: #3a2a10;
+  border: 1px solid tokens.$accent;
+  transform: rotate(45deg);
+}
+
+.stats {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.statValue {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .title,
+  .desktopOnly {
+    display: none;
+  }
+}

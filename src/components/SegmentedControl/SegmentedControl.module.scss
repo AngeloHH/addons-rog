@@ -1,0 +1,44 @@
+@use '../../styles/base/tokens';
+
+.group {
+  display: flex;
+}
+
+.option {
+  min-height: 36px;
+  padding: 0 12px;
+  margin-left: -1px;
+  background: linear-gradient(180deg, rgba(40, 36, 30, 0.85), rgba(14, 12, 9, 0.9));
+  border: 1px solid tokens.$border-control;
+  box-shadow: 0 0 0 1px #15120e;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+
+  // Highlight the selected segment in gold and raise its border above neighboring buttons.
+  &[data-selected='true'] {
+    position: relative;
+    background: linear-gradient(180deg, #f1d68a, #b8892f);
+    border-color: #2a2118;
+    color: #231806;
+  }
+}
+
+.group[data-size='sm'] .option {
+  min-height: 34px;
+}
+
+.group[data-size='lg'] .option {
+  min-height: 38px;
+}

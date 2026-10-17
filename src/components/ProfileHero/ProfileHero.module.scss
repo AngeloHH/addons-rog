@@ -1,0 +1,578 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/layout';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  border-bottom: 1px solid #2a2620;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: saturate(0.7);
+  object-fit: cover;
+  object-position: center 30%;
+  opacity: 0.28;
+}
+
+.fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 10, 8, 0.55) 0%,
+    rgba(12, 10, 8, 0.85) 60%,
+    tokens.$bg-page 100%
+  );
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 20%, rgba(200, 162, 74, 0.16), transparent 55%);
+}
+
+.inner {
+  position: relative;
+  @include layout.centered;
+  padding: 36px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.moderation {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px 14px;
+  background: linear-gradient(90deg, #1b150c, tokens.$bg-panel);
+  border: 1px solid tokens.$border-frame-outer;
+  box-shadow: 0 0 0 1px #17130e;
+}
+
+.identity {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.identityText {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  @include typography.kicker;
+}
+
+.kickerLine {
+  width: 28px;
+  height: 1px;
+  background: tokens.$accent;
+}
+
+.separator {
+  color: #4a3a1c;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--status-color, tokens.$success);
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--status-color, tokens.$success);
+}
+
+.name {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1;
+  text-shadow:
+    0 2px 0 #000,
+    0 0 30px rgba(200, 162, 74, 0.35);
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: tokens.$text-secondary;
+  font-size: 14px;
+}
+
+// =============================================================================
+// PROFILE METADATA
+// =============================================================================
+
+// Allow the leading metadata item to supply its own highlight color.
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--meta-tone, inherit);
+
+  // Use bold text when a metadata item supplies a highlight color.
+  &[style*='--meta-tone'] {
+    font-weight: 700;
+  }
+
+  svg {
+    flex: 0 0 auto;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.loadout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+}
+
+.slots {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.slot {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  background: linear-gradient(180deg, rgba(40, 36, 30, 0.85), rgba(14, 12, 9, 0.9));
+  border: 1px solid tokens.$border-control;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px #15120e;
+  text-decoration: none;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+
+  &[data-align='right'] {
+    grid-template-columns: minmax(0, 1fr) 52px;
+    text-align: right;
+  }
+
+  // Preserve filled-slot height so both equipment columns remain aligned with the avatar.
+  &[data-empty='true'] {
+    background: none;
+    border-style: dashed;
+    border-color: #3d2f14;
+    box-shadow: none;
+    opacity: 0.5;
+
+    .slotIcon {
+      background: none;
+      border-style: dashed;
+      border-color: #3d2f14;
+      box-shadow: none;
+    }
+  }
+}
+
+.slotIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: tokens.$bg-page;
+  border: 1px solid var(--slot-color, tokens.$border-control);
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--slot-color, tokens.$border-control) 33%, transparent),
+    inset 0 0 0 1px #000;
+}
+
+.slotImage {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  object-position: left center;
+}
+
+// =============================================================================
+// EQUIPMENT RATINGS
+// =============================================================================
+
+// Use dark rating text over the supplied quality color.
+
+.slotRating {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  padding: 0 4px;
+  background: var(--slot-color, tokens.$border-control);
+  color: #231806;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.slotText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.slotName {
+  overflow: hidden;
+  color: var(--slot-color, tokens.$text-secondary);
+  font-size: 13px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slotDetail {
+  color: tokens.$text-muted;
+  font-size: 11px;
+}
+
+.avatar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 40px 18px 20px;
+  background: linear-gradient(180deg, rgba(27, 21, 12, 0.96), rgba(18, 14, 8, 0.98));
+  border: 1px solid tokens.$border-frame;
+  box-shadow: surfaces.$frame-shadow;
+}
+
+.avatarBadge {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  padding: 2px 12px;
+  background: linear-gradient(
+    180deg,
+    #f1d68a 0%,
+    #c9a04a 38%,
+    #8e6520 52%,
+    #b8892f 70%,
+    #e0bb62 100%
+  );
+  color: #231806;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+
+.rune {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 168px;
+  height: 168px;
+  margin: 8px 0 16px;
+}
+
+.runeOuter {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, #2a2114, tokens.$bg-page 70%);
+  border: 1px solid tokens.$border-frame;
+  box-shadow:
+    0 0 0 3px #1a1612,
+    0 0 0 4px #4a4438,
+    0 0 40px rgba(200, 162, 74, 0.25);
+  transform: rotate(45deg);
+}
+
+.runeInner {
+  position: absolute;
+  inset: 14px;
+  border: 1px solid #3d2f14;
+  transform: rotate(45deg);
+  animation: rune-glow 4s ease-in-out infinite;
+}
+
+@keyframes rune-glow {
+  0%,
+  100% {
+    border-color: #3d2f14;
+  }
+
+  50% {
+    border-color: tokens.$border-frame;
+  }
+}
+
+// =============================================================================
+// REDUCED MOTION
+// =============================================================================
+
+// Disable animation when the system requests less motion.
+
+@media (prefers-reduced-motion: reduce) {
+  .runeInner {
+    animation: none;
+  }
+}
+
+.initial {
+  position: relative;
+  color: var(--avatar-color, #7fb7d9);
+  font-family: tokens.$font-serif;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow:
+    0 0 24px color-mix(in srgb, var(--avatar-color, #7fb7d9) 55%, transparent),
+    0 2px 0 #000;
+}
+
+.spec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.specLabel {
+  @include typography.kicker;
+}
+
+.specValue {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--spec-color, tokens.$success);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.specImage {
+  width: 22px;
+  height: 22px;
+  object-fit: cover;
+  object-position: left center;
+}
+
+.bar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.barHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: tokens.$text-secondary;
+  font-size: 12px;
+}
+
+.barLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  svg {
+    flex: 0 0 auto;
+  }
+}
+
+.barValue {
+  font-weight: 700;
+}
+
+.barTrack {
+  height: 10px;
+  background: tokens.$bg-page;
+  border: 1px solid #3d2f14;
+  box-shadow: inset 0 1px 3px #000;
+}
+
+// =============================================================================
+// PROGRESS BARS
+// =============================================================================
+
+// Default to a glowing gold fill when no custom color is supplied.
+
+.barFill {
+  height: 100%;
+  background: linear-gradient(90deg, #8e6520, #e0bb62, #f1d68a);
+  box-shadow: 0 0 8px rgba(224, 187, 98, 0.6);
+
+  &[data-plain='true'] {
+    background: var(--bar-color);
+    box-shadow: none;
+    opacity: 0.85;
+  }
+}
+
+.barHint {
+  color: tokens.$text-muted;
+  font-size: 11px;
+  text-align: center;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px;
+  background: tokens.$border-panel;
+  border: 1px solid tokens.$border-panel;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  background: tokens.$bg-panel;
+}
+
+.statLabel {
+  color: tokens.$text-muted;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.statRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.statValue {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.statDelta {
+  color: var(--delta-color, tokens.$text-muted);
+  font-size: 11px;
+}
+
+.tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid #2a2620;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+
+  &[data-active='true'] {
+    background: #171208;
+    border-bottom-color: tokens.$accent-muted;
+    color: tokens.$text-heading;
+  }
+}
+
+.tabCount {
+  color: tokens.$text-muted;
+  font-family: tokens.$font-serif;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+@media (max-width: tokens.$tablet-max) {
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .inner {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .name {
+    font-size: 30px;
+    line-height: 1.1;
+  }
+
+  // Stack equipment slots below the avatar and align them consistently on small screens.
+  .loadout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .slot[data-align='right'] {
+    grid-template-columns: 52px minmax(0, 1fr);
+    text-align: left;
+
+    .slotText {
+      order: 2;
+    }
+
+    .slotIcon {
+      order: 1;
+    }
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tabs {
+    overflow-x: auto;
+  }
+}

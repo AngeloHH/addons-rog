@@ -1,0 +1,47 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  @include surfaces.panel;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid tokens.$border-divider;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-width: 0;
+}
+
+.title {
+  @include typography.title(16px);
+}
+
+.note {
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  &[data-padded='true'] {
+    gap: 12px;
+    padding: 16px 18px;
+  }
+}

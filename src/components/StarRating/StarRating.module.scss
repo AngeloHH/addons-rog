@@ -1,0 +1,22 @@
+@use '../../styles/base/tokens';
+
+.rating {
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  color: tokens.$link;
+  vertical-align: middle;
+}
+
+.star {
+  display: flex;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}

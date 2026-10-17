@@ -1,0 +1,124 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/layout';
+
+.detail {
+  @include layout.container;
+  padding: 36px 24px 80px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+  gap: 36px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-width: 0;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.heading {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 24px;
+  font-weight: 400;
+  text-shadow: 0 1px 0 #000;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #cdbd99;
+  font-size: 15px;
+  line-height: 1.65;
+  text-wrap: pretty;
+
+  p {
+    margin: 0;
+  }
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guideLink {
+  align-self: flex-start;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #6b5527;
+  color: tokens.$link;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.guideArrow {
+  flex: 0 0 auto;
+  display: inline-block;
+  margin-left: 4px;
+  vertical-align: -2px;
+}
+
+.commentsHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.commentsCount {
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+}
+
+.noComments {
+  margin: 0;
+  color: tokens.$text-muted;
+  font-size: 14px;
+}
+
+.aside {
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.author {
+  color: tokens.$text-secondary;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .aside {
+    position: static;
+  }
+
+  .detail {
+    grid-template-columns: minmax(0, 1fr);
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}

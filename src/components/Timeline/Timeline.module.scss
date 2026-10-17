@@ -1,0 +1,232 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+
+// =============================================================================
+// DAY HEADINGS
+// =============================================================================
+
+// Separate consecutive days with a heading strip.
+
+.day {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: tokens.$bg-page;
+  border-bottom: 1px solid tokens.$border-divider;
+}
+
+.dayLabel {
+  @include typography.kicker;
+}
+
+// =============================================================================
+// DAY SEPARATORS
+// =============================================================================
+
+// Fade the rule toward the right-hand count.
+
+.dayRule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, #4a3a1c, transparent);
+}
+
+.dayCount {
+  color: tokens.$border-frame-outer;
+  font-size: 12px;
+}
+
+// =============================================================================
+// TIMELINE TRACK
+// =============================================================================
+
+// Draw the track behind the diamonds; each marker's halo covers the line beneath it.
+
+.track {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 53px;
+    width: 1px;
+    background: linear-gradient(180deg, #3d2f14, #3d2f14 85%, transparent);
+  }
+}
+
+.event {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px 36px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0 12px;
+  padding: 10px 16px 10px 0;
+  border-bottom: 1px solid #1a1409;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background: #171208;
+  }
+}
+
+.when {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 9px;
+  padding-right: 6px;
+}
+
+.time {
+  color: tokens.$border-frame-outer;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dot {
+  flex: 0 0 auto;
+  width: 9px;
+  height: 9px;
+  background: tokens.$bg-panel;
+  border: 1px solid var(--event-color, tokens.$border-frame-outer);
+  box-shadow: 0 0 0 3px tokens.$bg-panel;
+  transform: rotate(45deg);
+
+  &[data-solid='true'] {
+    background: var(--event-color, tokens.$border-frame-outer);
+  }
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--avatar-background, #2a2114);
+  border: 1px solid tokens.$border-panel;
+  color: var(--avatar-color, tokens.$text-secondary);
+  font-family: tokens.$font-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+// =============================================================================
+// EVENT TEXT
+// =============================================================================
+
+// Keep each event in one sentence and wrap at word boundaries when needed.
+
+.line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #cdbd99;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.who {
+  color: tokens.$text-heading;
+  font-weight: 700;
+  text-decoration: none;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+.role {
+  padding: 1px 6px;
+  border: 1px solid var(--role-color, tokens.$text-muted);
+  color: var(--role-color, tokens.$text-muted);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.target {
+  color: tokens.$text-strong;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+.detail {
+  padding: 6px 10px;
+  background: tokens.$bg-page;
+  border-left: 2px solid var(--event-color, tokens.$border-frame-outer);
+  color: tokens.$text-subtle;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.meta {
+  color: tokens.$border-frame-outer;
+  font-size: 12px;
+}
+
+.kind {
+  margin-top: 8px;
+  padding: 2px 7px;
+  border: 1px solid var(--event-color, tokens.$border-control);
+  color: var(--event-color, tokens.$text-secondary);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+// =============================================================================
+// MOBILE TIMELINE
+// =============================================================================
+
+// Move timestamps into the event text and remove their separate column.
+
+@media (max-width: tokens.$mobile-max) {
+  .event {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 4px 12px;
+    padding: 12px 16px;
+  }
+
+  .when {
+    justify-content: flex-start;
+    order: -1;
+    grid-column: 1 / -1;
+    padding: 0;
+  }
+
+  .dot {
+    box-shadow: none;
+  }
+
+  .kind {
+    grid-column: 2;
+    margin-top: 2px;
+    justify-self: start;
+  }
+
+  .track::before {
+    display: none;
+  }
+}

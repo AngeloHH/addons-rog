@@ -1,0 +1,316 @@
+@use '../../styles/base/tokens';
+
+.document {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: #cdbd99;
+  font-size: 15px;
+  line-height: 1.65;
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  a {
+    color: tokens.$link;
+  }
+
+  strong {
+    color: tokens.$text-strong;
+  }
+
+  ol,
+  ul {
+    margin: 0;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    list-style: none;
+    counter-reset: step;
+  }
+
+  // Frame ordered-list numbers like the steps in the shared template.
+  ol > li {
+    position: relative;
+    counter-increment: step;
+    padding-left: 44px;
+
+    &::before {
+      content: counter(step);
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(180deg, #2a2620, #0f0d0a);
+      border: 1px solid tokens.$border-control;
+      box-shadow: 0 0 0 1px #15120e;
+      color: tokens.$text-heading;
+      font-family: tokens.$font-serif;
+      font-size: 13px;
+      font-weight: 700;
+    }
+  }
+
+  ul > li {
+    position: relative;
+    padding-left: 22px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 9px;
+      left: 4px;
+      width: 7px;
+      height: 7px;
+      background: #3a2a10;
+      border: 1px solid tokens.$accent;
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.heading {
+  margin: 14px 0 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 26px;
+  font-weight: 400;
+  scroll-margin-top: 96px;
+  text-shadow: 0 1px 0 #000;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.subheading {
+  margin: 8px 0 0;
+  color: tokens.$text-strong;
+  font-size: 16px;
+  font-weight: 700;
+  scroll-margin-top: 96px;
+}
+
+// =============================================================================
+// INLINE CODE
+// =============================================================================
+
+// Wrap long paths so they stay within the page.
+
+.inlineCode {
+  overflow-wrap: anywhere;
+  padding: 1px 5px;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-panel;
+  color: tokens.$text-input;
+  font-family: tokens.$font-mono;
+  font-size: 0.9em;
+}
+
+.codeBlock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+// =============================================================================
+// CODE LABELS
+// =============================================================================
+
+// Use the fence label to select the success or warning color.
+
+.codeLabel {
+  align-self: flex-start;
+  padding: 3px 10px;
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+  border-bottom: 0;
+  color: tokens.$text-muted;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pre {
+  margin: 0;
+  overflow-x: auto;
+  padding: 12px 16px;
+  background: #080706;
+  border: 1px solid tokens.$border-panel;
+  border-left: 2px solid tokens.$border-frame;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-mono;
+  font-size: 13.5px;
+  line-height: 1.6;
+
+  code {
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    padding: 0;
+  }
+}
+
+[data-label='Correct'],
+[data-label='Correcto'] {
+  .codeLabel {
+    border-color: tokens.$success;
+    color: tokens.$success;
+  }
+
+  .pre {
+    border-color: tokens.$border-panel;
+    border-left-color: tokens.$success;
+  }
+}
+
+[data-label='Wrong'],
+[data-label='Incorrecto'] {
+  .codeLabel {
+    border-color: tokens.$warning;
+    color: tokens.$warning;
+  }
+
+  .pre {
+    border-color: tokens.$border-panel;
+    border-left-color: tokens.$warning;
+  }
+}
+
+// =============================================================================
+// CALLOUTS
+// =============================================================================
+
+// Use the blockquote's first bold label to select its color.
+
+.callout {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 12px 16px;
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+  border-left: 2px solid tokens.$accent;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  color: #cdbd99;
+  font-size: 14px;
+  line-height: 1.55;
+
+  strong:first-child {
+    color: tokens.$accent;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  &[data-label='Heads up'],
+  &[data-label='Aviso'] {
+    border-left-color: tokens.$warning;
+
+    strong:first-child {
+      color: tokens.$warning;
+    }
+  }
+}
+
+// =============================================================================
+// COLLAPSIBLE SECTIONS
+// =============================================================================
+
+// Use the heading as the toggle and collapse its following content.
+
+.collapsible {
+  border-bottom: 1px solid #2a2620;
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+
+  &[open] .summary::after {
+    transform: rotate(45deg);
+  }
+
+  > *:not(.summary) {
+    padding: 0 0 18px;
+  }
+}
+
+.summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 16px 32px 16px 0;
+  cursor: pointer;
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  // Rotate the diamond indicator when the section opens.
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    margin-top: -4px;
+    border-right: 1px solid tokens.$accent;
+    border-bottom: 1px solid tokens.$accent;
+    transform: rotate(-45deg);
+    transition: transform 0.2s ease;
+  }
+
+  &:hover h3 {
+    color: tokens.$text-hover;
+  }
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+  border-collapse: collapse;
+  font-size: 14px;
+
+  th,
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid tokens.$border-divider;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: tokens.$bg-page;
+    color: tokens.$accent-muted;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+}

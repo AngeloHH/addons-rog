@@ -1,0 +1,134 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/layout';
+@use '../../styles/base/typography';
+
+.section {
+  margin-top: 48px;
+  background: linear-gradient(180deg, tokens.$bg-page 0%, #120e09 50%, tokens.$bg-page 100%);
+  border-top: 1px solid #2a2620;
+  border-bottom: 1px solid #2a2620;
+  box-shadow:
+    inset 0 1px 0 #0a0908,
+    inset 0 -1px 0 #0a0908;
+}
+
+.inner {
+  @include layout.centered;
+  padding: 64px 24px;
+}
+
+.head {
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+.kicker {
+  margin-bottom: 8px;
+  @include typography.kicker;
+}
+
+.title {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 32px;
+  font-weight: 400;
+  text-shadow: 0 2px 0 #000;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.groupTitle {
+  margin: 0;
+  color: tokens.$link;
+  font-family: tokens.$font-display;
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.groupRule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, #4a3a1c, transparent);
+}
+
+.groupCount {
+  color: tokens.$text-muted;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: tokens.$bg-panel;
+  border: 1px solid #2a2114;
+  text-decoration: none;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+
+  &:hover {
+    background: #171208;
+    border-color: tokens.$accent;
+  }
+}
+
+.itemIcon {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+.itemText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.itemName {
+  color: tokens.$text-input;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.itemCount {
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .inner {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}

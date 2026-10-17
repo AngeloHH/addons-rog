@@ -1,0 +1,25 @@
+@use './tokens';
+
+// =============================================================================
+// RESPONSIVE COLUMN UTILITIES
+// =============================================================================
+
+// Generate column classes with Sass so components only select existing class names.
+
+$screens: (
+  sm: '(max-width: #{tokens.$mobile-max})',
+  md: '(min-width: #{tokens.$tablet-min}) and (max-width: #{tokens.$tablet-max})',
+  lg: '(min-width: #{tokens.$desktop-min})',
+);
+
+@mixin classes($max: 8) {
+  @each $screen, $query in $screens {
+    @media #{$query} {
+      @for $count from 1 through $max {
+        .cols-#{$screen}-#{$count} {
+          grid-template-columns: repeat($count, minmax(0, 1fr));
+        }
+      }
+    }
+  }
+}

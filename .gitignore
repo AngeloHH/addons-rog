@@ -1,0 +1,21 @@
+node_modules/
+dist/
+.env
+.env.local
+.change-backups/
+.test-data/
+
+# Local editor settings and development logs.
+.idea/
+*.log
+
+# Local SQLite databases and auxiliary files in any directory.
+*.[sS][qQ][lL][iI][tT][eE]*
+*.[dD][bB]
+*.[dD][bB]-*
+*.[dD][bB][23]
+*.[dD][bB][23]-*
+*.[sS]3[dD][bB]
+*.[sS]3[dD][bB]-*
+*.[sS][lL]3
+*.[sS][lL]3-*

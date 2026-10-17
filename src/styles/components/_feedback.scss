@@ -1,0 +1,80 @@
+@use '../base/tokens';
+@use './surfaces';
+@use './buttons';
+
+.status {
+  display: inline-flex;
+  margin: 20px 0 0;
+  padding: 8px 12px;
+  color: #f0d78c;
+  background: #141009;
+  border: 1px solid #4a3a1c;
+  font-size: 13px;
+}
+
+.api-state {
+  padding: 1rem;
+  margin: 0.75rem 0;
+  border: 1px solid #806737;
+  border-radius: 0.4rem;
+  color: #e8d8b8;
+}
+.api-state[data-state='loading'] {
+  border: 0;
+  border-radius: 0;
+}
+.api-state[data-state='empty'] {
+  padding: 0 1rem;
+  border: 0;
+  border-radius: 0;
+}
+.api-state[role='alert'] {
+  background: linear-gradient(180deg, #1b150c, #120e08);
+  border: 1px solid tokens.$border-frame;
+  border-radius: 0;
+  box-shadow: surfaces.$frame-shadow;
+
+  p {
+    margin: 0 0 14px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+.api-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  color: tokens.$text-secondary;
+  font-variant-numeric: tabular-nums;
+}
+.api-pagination button,
+.api-state button {
+  min-height: 40px;
+  padding: 8px 20px;
+  border-radius: 0;
+  cursor: pointer;
+  font: inherit;
+
+  @include buttons.gold;
+
+  &:focus-visible {
+    outline: 2px solid tokens.$text-hover;
+    outline-offset: 4px;
+  }
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.api-action-form {
+  padding: 1.25rem;
+  border: 1px solid tokens.$accent;
+  margin: 1rem 0;
+  background: #18120c;
+}

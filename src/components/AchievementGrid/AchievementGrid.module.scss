@@ -1,0 +1,100 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/columns';
+@use '../../styles/components/surfaces';
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap: 12px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  @include surfaces.panel;
+
+  // Keep unearned achievements muted.
+  &[data-active='false'] {
+    opacity: 0.55;
+  }
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-panel;
+  box-shadow: 0 0 0 1px #15120e;
+
+  [data-active='true'] & {
+    background: linear-gradient(180deg, #3a2a10, #1c150a);
+    border-color: tokens.$border-frame;
+  }
+}
+
+.diamond {
+  width: 14px;
+  height: 14px;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$accent;
+  transform: rotate(45deg);
+
+  [data-active='true'] & {
+    background: tokens.$link;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.title {
+  color: tokens.$text-strong;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.text {
+  color: tokens.$text-subtle;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.value {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 6px 8px;
+  @include surfaces.control;
+}
+
+.number {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.unit {
+  color: tokens.$text-muted;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+
+// =============================================================================
+// RESPONSIVE COLUMNS
+// =============================================================================
+
+// Place column utilities last so they override .grid at equal specificity.
+
+@include columns.classes;

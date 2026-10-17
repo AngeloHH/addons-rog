@@ -1,0 +1,77 @@
+@use '../../styles/base/tokens';
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 16px;
+  border-top: 1px solid tokens.$border-divider;
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.summary {
+  min-width: 0;
+}
+
+.pages {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.page,
+.arrow {
+  min-width: 30px;
+  min-height: 30px;
+  padding: 0 8px;
+  background: linear-gradient(180deg, rgba(40, 36, 30, 0.85), rgba(14, 12, 9, 0.9));
+  border: 1px solid tokens.$border-control;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+
+  &:hover:not(:disabled) {
+    border-color: tokens.$accent;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.4;
+  }
+}
+
+.page[data-selected='true'] {
+  background: linear-gradient(180deg, #f1d68a, #b8892f);
+  border-color: #2a2118;
+  color: #231806;
+}
+
+// =============================================================================
+// PAGE ARROWS
+// =============================================================================
+
+// Rotate the shared arrow for backward navigation.
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    transform: rotate(180deg);
+  }
+
+  &[data-next='true'] svg {
+    transform: none;
+  }
+}
+
+.gap {
+  padding: 0 2px;
+}

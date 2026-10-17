@@ -1,0 +1,32 @@
+@use '../../styles/base/tokens';
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.link {
+  color: tokens.$text-subtle;
+  text-decoration: none;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+.separator {
+  display: flex;
+  color: #4a3a1c;
+
+  svg {
+    flex: 0 0 auto;
+  }
+}
+
+.current {
+  color: tokens.$text-secondary;
+}

@@ -1,0 +1,19 @@
+@use '../base/tokens';
+@use './surfaces';
+
+@mixin label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: tokens.$text-secondary;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+@mixin field {
+  @include surfaces.control;
+  color: tokens.$text-input;
+  color-scheme: dark;
+  font-size: 14px;
+  outline: none;
+}

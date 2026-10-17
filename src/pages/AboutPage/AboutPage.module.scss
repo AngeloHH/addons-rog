@@ -1,0 +1,298 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/layout';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+
+.founders {
+  @include layout.container;
+  padding: 56px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.foundersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+  gap: 20px;
+}
+
+.timeline {
+  @include layout.container;
+  padding: 64px 24px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+  gap: 40px;
+}
+
+.timelineMain {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+.aside {
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  @include surfaces.panel;
+}
+
+.panelKicker {
+  @include typography.kicker;
+}
+
+.panelText {
+  margin: 0;
+  color: #cdbd99;
+  font-size: 14px;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.panelNote {
+  color: tokens.$text-subtle;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.panelAction {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 9px 16px;
+  font-size: 13px;
+
+  @include buttons.gold;
+}
+
+.funding {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid tokens.$border-divider;
+}
+
+.fundingHead {
+  display: flex;
+  justify-content: space-between;
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.fundingValue {
+  color: tokens.$text-heading;
+  font-weight: 600;
+}
+
+.bar {
+  height: 6px;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-panel;
+}
+
+.barFill {
+  height: 100%;
+  background: linear-gradient(90deg, #8e6520, #e0bb62);
+}
+
+.fundingDetail {
+  color: tokens.$text-subtle;
+  font-size: 12px;
+}
+
+.ranking {
+  display: flex;
+  flex-direction: column;
+}
+
+.person {
+  display: grid;
+  grid-template-columns: 24px 32px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid tokens.$border-divider;
+
+  &:last-child {
+    border-bottom-color: transparent;
+  }
+}
+
+// =============================================================================
+// CONTRIBUTOR RANKS
+// =============================================================================
+
+// Use gold, silver, and muted colors according to list position.
+
+.rank {
+  color: tokens.$text-muted;
+  font-family: tokens.$font-serif;
+  font-size: 13px;
+  font-weight: 700;
+
+  .person:first-child & {
+    color: tokens.$link;
+  }
+
+  .person:nth-child(2) & {
+    color: tokens.$text-secondary;
+  }
+}
+
+.initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--person-dark);
+  border: 1px solid tokens.$border-panel;
+  color: var(--person-accent);
+  font-family: tokens.$font-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.personName {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.personLink {
+  overflow: hidden;
+  color: tokens.$text-secondary;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+.personSince {
+  color: tokens.$text-muted;
+  font-size: 11px;
+}
+
+.personCount {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kicker {
+  @include typography.kicker;
+}
+
+.title {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 26px;
+  font-weight: 400;
+  text-shadow: 0 1px 0 #000;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 24px;
+  text-align: right;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.statValue {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 26px;
+  font-weight: 700;
+  text-shadow: 0 1px 0 #000;
+  white-space: nowrap;
+}
+
+.statLabel {
+  color: tokens.$text-muted;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.achievements {
+  @include layout.container;
+  padding: 64px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.achievementsHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.achievementsCount {
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .founders,
+  .achievements {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .timeline {
+    grid-template-columns: minmax(0, 1fr);
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .aside {
+    position: static;
+  }
+
+  // Align mobile statistics with the text column.
+  .stats {
+    justify-content: start;
+    text-align: left;
+  }
+
+  .stat {
+    align-items: flex-start;
+  }
+}

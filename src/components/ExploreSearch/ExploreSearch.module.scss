@@ -1,0 +1,135 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+
+.searchSection {
+  position: relative;
+  padding: 56px 24px 40px;
+  @include surfaces.hero;
+}
+
+.inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @include typography.kicker;
+
+  span:first-child,
+  span:last-child {
+    width: 28px;
+    height: 1px;
+    background: tokens.$accent;
+  }
+}
+
+.inner h1 {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.1;
+  text-shadow:
+    0 2px 0 #000,
+    0 3px 8px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  text-wrap: balance;
+  word-spacing: 0.3em;
+}
+
+.searchBox {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  @include surfaces.framed;
+}
+
+.searchBox input {
+  min-width: 0;
+  min-height: 50px;
+  flex: 1;
+  padding: 0 16px;
+  color: tokens.$text-input;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-panel;
+  border-right: 0;
+  font-size: 16px;
+  outline: none;
+}
+
+.searchBox button {
+  min-height: 50px;
+  padding: 0 26px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #231806;
+  @include buttons.gold-surface;
+  cursor: pointer;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 240, 200, 0.4);
+
+  &:hover {
+    @include buttons.gold-hover;
+  }
+}
+
+.popular {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.popular button {
+  padding: 3px 10px;
+  color: tokens.$text-secondary;
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+
+  &:hover {
+    color: tokens.$text-hover;
+    border-color: tokens.$accent;
+  }
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .searchSection {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .inner h1 {
+    font-size: 30px;
+  }
+
+  .searchBox {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .searchBox input {
+    border-right: 1px solid tokens.$border-panel;
+  }
+
+  .searchBox button {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,352 @@
+@use '../../../styles/base/tokens';
+@use '../../../styles/base/typography';
+@use '../../../styles/components/surfaces';
+
+.pulsePanel,
+.chroniclePanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 22px;
+  border: 1px solid tokens.$border-frame;
+  box-shadow: surfaces.$frame-shadow;
+}
+
+.pulsePanel {
+  background: linear-gradient(160deg, #1c150a 0%, tokens.$bg-panel 60%);
+  overflow: hidden;
+}
+
+.chroniclePanel {
+  background: linear-gradient(180deg, #1b150c, #120e08);
+}
+
+.pulseGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 0%, rgba(200, 162, 74, 0.12), transparent 55%);
+  pointer-events: none;
+}
+
+.pulseHead,
+.chartHead {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pulseHead {
+  align-items: center;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kicker {
+  @include typography.kicker;
+}
+
+.pulseTitle,
+.chartTitle {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-weight: 400;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.pulseTitle {
+  font-size: 18px;
+}
+
+.chartTitle {
+  font-size: 16px;
+}
+
+.pulseBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  @include surfaces.control;
+  color: tokens.$text-secondary;
+  font-size: 12px;
+}
+
+.pulseCount {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pulseNumber {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 56px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow:
+    0 2px 0 #000,
+    0 3px 8px rgba(0, 0, 0, 0.6);
+}
+
+.pulseText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: tokens.$text-subtle;
+  font-size: 13px;
+}
+
+.pace {
+  color: tokens.$success;
+  font-weight: 600;
+}
+
+.pulseNote {
+  position: relative;
+  color: tokens.$border-frame-outer;
+  font-size: 12px;
+}
+
+// =============================================================================
+// CIRCULAR CHART NOTES
+// =============================================================================
+
+// Keep supporting labels consistent beside the circular charts.
+
+.chartNote {
+  color: tokens.$text-muted;
+  font-size: 12px;
+  text-align: right;
+}
+
+.chartBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  align-items: center;
+  gap: 16px;
+}
+
+.chartFacts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #cdbd99;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.factValue {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.factLabel {
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: tokens.$font-serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.arrow {
+  color: tokens.$border-frame-outer;
+}
+
+.scale {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: tokens.$border-frame-outer;
+  font-size: 11px;
+}
+
+.scaleBar {
+  width: 40px;
+  height: 8px;
+  background: linear-gradient(90deg, #1a1409, #8e6520, #f1d68a);
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .chartBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+// =============================================================================
+// RECORD CARDS
+// =============================================================================
+
+// Let record cards arrange themselves across the available width.
+
+.recordGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr));
+  gap: 10px;
+}
+
+.record {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  background: linear-gradient(180deg, #16110a, tokens.$bg-panel);
+  border: 1px solid tokens.$border-panel;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+}
+
+.recordLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: tokens.$accent-muted;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+// =============================================================================
+// RECORD INDICATORS
+// =============================================================================
+
+// Fill the diamond in gold while the record remains unbeaten.
+
+.recordDot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  background: #3a2a10;
+  border: 1px solid tokens.$accent;
+  transform: rotate(45deg);
+
+  &[data-gold='true'] {
+    background: tokens.$link;
+  }
+}
+
+.recordHolder {
+  color: tokens.$text-strong;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+.recordValue {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.recordNote {
+  color: tokens.$text-muted;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+// =============================================================================
+// PERIOD STORY
+// =============================================================================
+
+// Present the period summary as continuous prose.
+
+.story {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #cdbd99;
+  font-size: 15px;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.chapter {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+
+  strong {
+    color: tokens.$text-heading;
+    font-weight: 700;
+  }
+}
+
+.numeral {
+  flex: 0 0 auto;
+  margin-top: 5px;
+  color: tokens.$accent-muted;
+  font-family: tokens.$font-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.chronicleFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #2a2114;
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+// =============================================================================
+// LIVE INDICATOR
+// =============================================================================
+
+// Use a slightly larger dot than the sidebar indicator.
+
+.liveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: tokens.$success;
+  box-shadow: 0 0 8px tokens.$success;
+}
+
+.feedToggle {
+  height: 30px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.export {
+  height: 32px;
+  padding: 0 12px;
+  cursor: pointer;
+}

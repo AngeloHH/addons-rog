@@ -1,0 +1,23 @@
+@use './tokens';
+
+@mixin centered {
+  max-width: tokens.$content-width;
+  margin: 0 auto;
+}
+
+@mixin container {
+  width: 100%;
+  @include centered;
+}
+
+// =============================================================================
+// TOP-LEVEL ALERT INSETS
+// =============================================================================
+
+// Align alerts with the content and leave space for their frame.
+
+@mixin alert-inset {
+  width: calc(100% - 48px);
+  max-width: 1152px;
+  margin: 32px auto;
+}

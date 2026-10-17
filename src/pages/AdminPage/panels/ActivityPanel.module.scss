@@ -1,0 +1,196 @@
+@use '../../../styles/base/tokens';
+@use '../../../styles/base/typography';
+
+// =============================================================================
+// ACTIVITY SUMMARY
+// =============================================================================
+
+// Place the summary feed inside an unpadded panel.
+
+.feed {
+  padding: 10px 18px 14px;
+}
+
+.event {
+  color: #cdbd99;
+  font-size: 13px;
+  line-height: 1.5;
+
+  a {
+    color: tokens.$text-heading;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      color: tokens.$text-hover;
+    }
+  }
+
+  strong {
+    color: tokens.$text-strong;
+    font-weight: 400;
+  }
+}
+
+// =============================================================================
+// ACTIVITY COLUMNS
+// =============================================================================
+
+// Share width between the timeline and totals, stacking them on narrow screens.
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(560px, 100%), 1fr));
+  align-items: start;
+  gap: 20px;
+}
+
+.export {
+  height: 36px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+// =============================================================================
+// MOST ACTIVE ACCOUNTS
+// =============================================================================
+
+.people {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.person {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--avatar-background, #2a2114);
+  border: 1px solid tokens.$border-panel;
+  color: var(--avatar-color, tokens.$text-secondary);
+  font-family: tokens.$font-serif;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.personText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.personName {
+  color: tokens.$text-heading;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+.personKinds {
+  overflow: hidden;
+  color: tokens.$border-frame-outer;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.personCount {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+// =============================================================================
+// ACTIVITY DISTRIBUTION
+// =============================================================================
+
+// Size each segment of the shared bar by its event count.
+
+.mixBar {
+  display: flex;
+  height: 6px;
+  overflow: hidden;
+}
+
+.mixList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 16px;
+  margin-top: 12px;
+}
+
+.mixItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cdbd99;
+  font-size: 12px;
+}
+
+.mixDot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+}
+
+.mixShare {
+  margin-left: auto;
+  color: tokens.$text-subtle;
+  font-weight: 400;
+}
+
+// =============================================================================
+// ACTIVITY RETENTION
+// =============================================================================
+
+.retention {
+  margin: 0;
+  color: tokens.$text-subtle;
+  font-size: 13px;
+  line-height: 1.6;
+
+  strong {
+    color: tokens.$text-heading;
+  }
+}
+
+.policy {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: tokens.$link;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+// =============================================================================
+// SIDEBAR LABELS
+// =============================================================================
+
+// Use a small label without the full panel heading and divider.
+
+.kicker {
+  @include typography.kicker;
+}

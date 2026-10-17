@@ -1,0 +1,106 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+
+.card {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 20px;
+  padding: 22px;
+  background: linear-gradient(160deg, var(--person-background, #1c150a) 0%, tokens.$bg-panel 60%);
+  border: 1px solid tokens.$border-frame;
+  box-shadow: surfaces.$frame-shadow;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-control;
+  box-shadow:
+    0 0 0 1px #15120e,
+    0 0 0 3px #2a2114;
+  color: var(--person-accent, tokens.$accent);
+  font-family: tokens.$font-serif;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.role {
+  color: var(--person-accent, tokens.$accent);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.name {
+  @include typography.title(22px);
+}
+
+.title {
+  color: tokens.$text-subtle;
+  font-size: 13px;
+}
+
+.text {
+  margin: 0;
+  color: #cdbd99;
+  font-size: 14px;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.bars,
+.tags {
+  margin-top: 4px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  // Move the initial panel above the profile text on small screens.
+  .card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .side {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 14px;
+  }
+
+  .initial {
+    width: 64px;
+    height: 64px;
+    font-size: 26px;
+  }
+}

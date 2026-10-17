@@ -1,0 +1,357 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+
+.shell {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  min-height: 100vh;
+  background: tokens.$bg-page;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #120e09, tokens.$bg-page);
+  border-right: 1px solid #2a2620;
+  box-shadow: 1px 0 0 #0a0908;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border-bottom: 1px solid #2a2620;
+  text-decoration: none;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.8));
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  min-width: 0;
+}
+
+.brandName {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 16px;
+  font-weight: 400;
+  text-shadow: 0 1px 0 #000;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.brandSite {
+  color: tokens.$text-muted;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 0;
+  overflow-y: auto;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.groupLabel {
+  padding: 6px 16px 8px;
+  @include typography.kicker;
+}
+
+.group + .group .groupLabel {
+  padding-top: 14px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  background: none;
+  border: 0;
+  border-left: 2px solid transparent;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  text-decoration: none;
+
+  svg {
+    flex: 0 0 auto;
+  }
+
+  &:hover {
+    background: #171208;
+    color: tokens.$text-hover;
+  }
+
+  &[data-active='true'] {
+    background: #171208;
+    border-left-color: tokens.$accent-muted;
+    color: tokens.$text-heading;
+  }
+}
+
+// =============================================================================
+// NAVIGATION LABELS
+// =============================================================================
+
+// Let the label fill available space and push trailing indicators to the edge.
+
+.navLabel {
+  flex: 1;
+  min-width: 0;
+}
+
+// =============================================================================
+// NAVIGATION COUNTS
+// =============================================================================
+
+// Highlight actionable counts in gold; keep informational totals unboxed.
+
+.badge {
+  min-width: 22px;
+  padding: 2px 6px;
+  background: linear-gradient(180deg, #f1d68a, #b8892f);
+  border: 1px solid #2a2118;
+  color: #231806;
+  font-family: tokens.$font-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.count {
+  min-width: 22px;
+  padding: 2px 6px;
+  color: tokens.$text-muted;
+  font-size: 11px;
+  text-align: center;
+}
+
+.live {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: tokens.$success;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: tokens.$success;
+  box-shadow: 0 0 6px tokens.$success;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+  padding: 16px;
+  border-top: 1px solid #2a2620;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.accountInitial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  background: #12283a;
+  border: 1px solid tokens.$border-panel;
+  color: #7fb7d9;
+  font-family: tokens.$font-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.accountText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.accountName {
+  color: tokens.$text-strong;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.accountRole {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: tokens.$accent;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footerActions {
+  display: flex;
+  gap: 6px;
+}
+
+.exit {
+  flex: 1;
+}
+
+.signOut {
+  width: 34px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+// =============================================================================
+// STICKY HEADER
+// =============================================================================
+
+// Keep the administration header visible with its own gold border.
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 14px 28px;
+  background: linear-gradient(180deg, #171209, #100d09);
+  border-bottom: 1px solid tokens.$border-frame-outer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.topbarText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.date {
+  @include typography.kicker;
+  white-space: nowrap;
+}
+
+.pageTitle {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 22px;
+  font-weight: 400;
+  text-shadow: 0 1px 0 #000;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 160px;
+  max-width: 320px;
+  min-width: 0;
+  min-height: 38px;
+  padding: 0 12px;
+  background: linear-gradient(180deg, rgba(40, 36, 30, 0.85), rgba(14, 12, 9, 0.9));
+  border: 1px solid tokens.$border-control;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px #15120e;
+  color: tokens.$text-muted;
+
+  svg {
+    flex: 0 0 auto;
+  }
+}
+
+.searchInput {
+  min-width: 0;
+  flex: 1;
+  background: none;
+  border: 0;
+  color: tokens.$text-input;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+
+  &::placeholder {
+    color: tokens.$text-muted;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 28px 48px;
+}
+
+@media (max-width: tokens.$tablet-max) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+  }
+
+  .nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .section,
+  .topbar {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}

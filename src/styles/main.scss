@@ -1,0 +1,10 @@
+// =============================================================================
+// GLOBAL STYLE ENTRY
+// =============================================================================
+
+// Load global styles once from the application entry point.
+
+@use './fonts';
+@use './base/global';
+@use './components/account';
+@use './components/feedback';

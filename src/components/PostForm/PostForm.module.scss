@@ -1,0 +1,118 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+@use '../../styles/components/forms';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  background: linear-gradient(180deg, #1b150c, #120e08);
+  border: 1px solid tokens.$border-panel;
+
+  // Use the shared gold frame for framed forms.
+  &[data-framed='true'] {
+    gap: 12px;
+    padding: 22px;
+    border-color: tokens.$border-frame;
+    box-shadow: surfaces.$frame-shadow;
+  }
+}
+
+.title {
+  margin: 0;
+  color: tokens.$text-strong;
+  font-size: 15px;
+  font-weight: 700;
+
+  &[data-large='true'] {
+    @include typography.title(20px);
+  }
+}
+
+.text {
+  margin: 0;
+  color: tokens.$text-subtle;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.field,
+.textarea {
+  @include forms.field;
+}
+
+.field {
+  min-height: 42px;
+  padding: 0 12px;
+}
+
+.textarea {
+  padding: 10px 12px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+// =============================================================================
+// SHARED FIELD ROWS
+// =============================================================================
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 14px;
+}
+
+.label {
+  @include forms.label;
+}
+
+.labelRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.note {
+  color: tokens.$text-muted;
+  font-weight: 400;
+
+  &[data-tone='ok'] {
+    color: tokens.$success;
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  // Let the submit button fill the row when there is no footer content beside it.
+  &[data-alone='true'] {
+    display: block;
+  }
+}
+
+.submit {
+  min-height: 44px;
+  @include buttons.gold;
+  cursor: pointer;
+
+  &[data-ready='false'] {
+    opacity: 0.55;
+  }
+
+  .footer[data-alone='true'] & {
+    width: 100%;
+  }
+
+  .footer[data-alone='false'] & {
+    min-height: 0;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}

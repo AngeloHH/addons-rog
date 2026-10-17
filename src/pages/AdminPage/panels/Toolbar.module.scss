@@ -1,0 +1,66 @@
+@use '../../../styles/base/tokens';
+@use '../../../styles/components/surfaces';
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid tokens.$border-divider;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  flex: 1 1 200px;
+  gap: 8px;
+  min-width: 0;
+  min-height: 36px;
+  padding: 0 12px;
+  @include surfaces.control;
+  color: tokens.$text-muted;
+}
+
+.input {
+  min-width: 0;
+  flex: 1;
+  background: none;
+  border: 0;
+  color: tokens.$text-input;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+
+  &::placeholder {
+    color: tokens.$text-muted;
+  }
+}
+
+// =============================================================================
+// SORT CONTROL
+// =============================================================================
+
+// Push the sort selector to the end opposite the search field.
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.select {
+  min-height: 36px;
+  padding: 0 10px;
+  background: #1a1612;
+  border: 1px solid tokens.$border-control;
+  color: tokens.$text-input;
+  color-scheme: dark;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+}

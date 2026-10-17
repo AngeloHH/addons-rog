@@ -1,0 +1,248 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/layout';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+
+.header {
+  position: relative;
+  overflow: hidden;
+  @include surfaces.hero;
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 0%, rgba(200, 162, 74, 0.1), transparent 55%);
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  @include layout.centered;
+  padding: 28px 24px 0;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .inner {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}
+
+.main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 32px;
+  padding: 28px 0 32px;
+}
+
+.identity {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  min-width: 0;
+}
+
+.frame {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  @include surfaces.framed;
+}
+
+.icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category {
+  @include typography.kicker;
+}
+
+.expansionBadge {
+  padding: 3px 8px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--expansion-accent);
+  color: var(--expansion-accent);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.patch {
+  padding: 3px 8px;
+  border: 1px solid tokens.$border-control;
+  color: tokens.$text-subtle;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.08;
+  text-shadow:
+    0 2px 0 #000,
+    0 3px 8px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.short {
+  margin: 0;
+  max-width: 640px;
+  color: #bfae88;
+  font-size: 16px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: tokens.$text-subtle;
+  font-size: 14px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  color: tokens.$link;
+}
+
+.ratingValue {
+  color: tokens.$text-secondary;
+}
+
+.votes {
+  color: tokens.$border-frame-outer;
+}
+
+.downloads {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.author {
+  color: tokens.$text-secondary;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  min-width: 240px;
+}
+
+.downloadButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 14px 26px;
+  @include buttons.gold;
+  font-size: 16px;
+}
+
+.downloadLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.downloadMeta {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.8;
+  text-shadow: none;
+}
+
+.secondaryActions {
+  display: flex;
+  gap: 8px;
+}
+
+.secondaryButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  @include surfaces.control;
+  color: #e8d39a;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .main {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 1.1;
+  }
+
+  .category {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .actions {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .downloadButton {
+    min-height: 52px;
+  }
+}

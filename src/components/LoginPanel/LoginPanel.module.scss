@@ -1,0 +1,258 @@
+@use '../../styles/base/tokens';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+@use '../../styles/components/forms';
+
+.panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @include surfaces.framed;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #2a2620;
+
+  a {
+    flex: 1;
+    padding: 14px 18px;
+    color: tokens.$text-muted;
+    background: transparent;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-family: tokens.$font-display;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    word-spacing: 0.3em;
+
+    &:hover {
+      color: tokens.$text-hover;
+    }
+  }
+
+  .activeTab {
+    color: tokens.$text-heading;
+    background: #171208;
+    border-bottom-color: tokens.$accent-muted;
+  }
+}
+
+.form {
+  padding: 26px 26px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  @include forms.label;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
+  color: tokens.$text-input;
+  @include surfaces.control;
+  font-size: 15px;
+  outline: none;
+}
+
+.field select {
+  color-scheme: dark;
+  cursor: pointer;
+}
+
+.hint {
+  color: tokens.$text-muted;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  a {
+    color: tokens.$link;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+  }
+}
+
+.passwordField {
+  position: relative;
+  display: flex;
+
+  input {
+    padding-right: 70px;
+  }
+
+  button {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    bottom: 6px;
+    padding: 0 10px;
+    color: tokens.$text-secondary;
+    background: none;
+    border: 0;
+    border-left: 1px solid tokens.$border-panel;
+    cursor: pointer;
+    font-size: 12px;
+
+    &:hover {
+      color: tokens.$text-hover;
+    }
+  }
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.5;
+
+  a {
+    color: tokens.$link;
+    text-decoration: none;
+
+    &:hover {
+      color: tokens.$text-hover;
+    }
+  }
+
+  .checkbox,
+  .checkboxChecked {
+    margin-top: 3px;
+  }
+}
+
+.checkbox,
+.checkboxChecked {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  border: 1px solid tokens.$border-control;
+  box-shadow: 0 0 0 1px #15120e;
+}
+
+.checkbox {
+  background: tokens.$bg-page;
+}
+
+.checkboxChecked {
+  background: linear-gradient(180deg, #d8b25c, #8e6520);
+}
+
+.strengthBars {
+  margin-top: 2px;
+  display: flex;
+  gap: 4px;
+}
+
+.strengthBar,
+.strengthBarFilled {
+  height: 4px;
+  flex: 1;
+}
+
+.strengthBar {
+  background: #2a2114;
+}
+
+.strengthBarFilled {
+  background: tokens.$accent;
+}
+
+.strengthLabel {
+  color: tokens.$text-muted;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.submit {
+  min-height: 48px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #231806;
+  @include buttons.gold-surface;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 240, 200, 0.4);
+
+  &:hover {
+    @include buttons.gold-hover;
+  }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: tokens.$border-frame-outer;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  span:first-child,
+  span:last-child {
+    height: 1px;
+    flex: 1;
+    background: #2a2114;
+  }
+}
+
+.providers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+
+  button {
+    min-height: 44px;
+    color: #e8d39a;
+    @include surfaces.control;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+
+    &:hover {
+      border-color: tokens.$accent;
+    }
+  }
+}
+
+.switchText {
+  margin: 6px 0 0;
+  color: tokens.$text-muted;
+  font-size: 14px;
+  text-align: center;
+
+  a {
+    color: tokens.$link;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}

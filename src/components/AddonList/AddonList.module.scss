@@ -1,0 +1,36 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kicker {
+  @include typography.kicker;
+}
+
+.link {
+  padding-bottom: 2px;
+  border-bottom: 1px solid #6b5527;
+  color: tokens.$link;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.linkArrow {
+  flex: 0 0 auto;
+  display: inline-block;
+  margin-left: 4px;
+  vertical-align: -2px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--addon-grid-min, 340px), 100%), 1fr));
+  gap: 14px;
+}

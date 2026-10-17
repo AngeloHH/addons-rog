@@ -1,0 +1,32 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  @include surfaces.panel;
+}
+
+.title {
+  @include typography.kicker;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px 16px;
+  margin: 0;
+  font-size: 14px;
+}
+
+.term {
+  color: tokens.$text-muted;
+}
+
+.value {
+  margin: 0;
+  color: tokens.$text-input;
+}

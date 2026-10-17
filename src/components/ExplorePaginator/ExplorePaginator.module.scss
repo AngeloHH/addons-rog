@@ -1,0 +1,16 @@
+@use '../../styles/components/surfaces';
+
+.paginator {
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+}
+
+.paginator button {
+  padding: 12px 28px;
+  color: #e8d39a;
+  @include surfaces.control;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}

@@ -1,0 +1,146 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/columns';
+@use '../../styles/components/surfaces';
+
+.tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+
+  // Let size control spacing and typography while columns controls the grid.
+  &[data-size='md'] {
+    gap: 12px;
+  }
+
+  &[data-size='lg'] {
+    gap: 12px;
+  }
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  @include surfaces.panel;
+
+  [data-size='md'] & {
+    gap: 4px;
+  }
+
+  [data-size='lg'] & {
+    gap: 6px;
+    padding: 16px 18px;
+  }
+}
+
+// =============================================================================
+// FILTER TILES
+// =============================================================================
+
+// Left-align filter buttons and highlight the selected border.
+
+[data-filter='true'] .tile {
+  align-items: stretch;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+
+  &[data-active='true'] {
+    border-color: var(--tile-color, tokens.$accent);
+  }
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: tokens.$text-muted;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  // Color the label for filter tiles and the value for ordinary tiles.
+  [data-filter='true'] & {
+    color: var(--tile-color, tokens.$text-muted);
+  }
+}
+
+.dot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  background: var(--tile-color, tokens.$text-muted);
+  transform: rotate(45deg);
+}
+
+// =============================================================================
+// STATISTIC COLORS
+// =============================================================================
+
+// Apply the tile accent to values when the tiles are not filters.
+
+.tiles:not([data-filter='true']) .value {
+  color: var(--tile-color, tokens.$text-heading);
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.value {
+  color: tokens.$text-heading;
+  font-size: 20px;
+
+  // Use heading typography for values at medium size and above.
+  [data-size='md'] & {
+    font-family: tokens.$font-serif;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  [data-size='lg'] & {
+    font-family: tokens.$font-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-shadow: 0 1px 0 #000;
+  }
+}
+
+// =============================================================================
+// DELTA COLORS
+// =============================================================================
+
+// Change the delta color without affecting the rest of the tile.
+
+.delta {
+  color: tokens.$text-muted;
+  font-size: 12px;
+  font-weight: 600;
+
+  &[data-tone='up'] {
+    color: tokens.$success;
+  }
+
+  &[data-tone='down'] {
+    color: tokens.$warning;
+  }
+}
+
+.sub {
+  color: tokens.$border-frame-outer;
+  font-size: 12px;
+}
+
+// =============================================================================
+// RESPONSIVE COLUMNS
+// =============================================================================
+
+// Place column utilities last so they override .tiles at equal specificity.
+
+@include columns.classes;

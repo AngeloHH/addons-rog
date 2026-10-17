@@ -1,0 +1,84 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/columns';
+@use '../../styles/components/surfaces';
+
+// =============================================================================
+// SHARED ADMIN LAYOUT
+// =============================================================================
+
+// Share these styles between the shell and panels; panel-specific rules stay in their modules.
+
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr));
+  align-items: start;
+  gap: 20px;
+}
+
+// =============================================================================
+// MATCHED PANEL HEIGHTS
+// =============================================================================
+
+// Stretch adjacent panels to a common height.
+
+.columns.stretch {
+  align-items: stretch;
+}
+
+// =============================================================================
+// PANEL COLUMNS
+// =============================================================================
+
+// Stack each column's panels vertically.
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+// =============================================================================
+// SUMMARY SECTION LINKS
+// =============================================================================
+
+// Link a summary panel's header to the full section.
+
+.panelLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: tokens.$link;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+// =============================================================================
+// SHARED ACTION FRAME
+// =============================================================================
+
+// Reuse the button frame for actions such as sign out, export, and pause.
+
+.framed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  @include surfaces.control;
+  color: tokens.$text-secondary;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+}

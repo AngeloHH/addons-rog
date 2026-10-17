@@ -1,0 +1,326 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/layout';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.primaryAction {
+  padding: 12px 22px;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+
+  @include buttons.gold;
+}
+
+.action {
+  padding: 12px 22px;
+  color: #e8d39a;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+
+  @include surfaces.control;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+}
+
+@media (max-width: tokens.$mobile-max) {
+  // Give each action button its own full-width row.
+  .primaryAction,
+  .action {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
+
+.rules {
+  @include layout.container;
+  padding: 40px 24px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  align-items: start;
+  gap: 40px;
+}
+
+// =============================================================================
+// STICKY RULE CHECKLIST
+// =============================================================================
+
+// Keep the checklist in the second column while the rule articles scroll beside it.
+
+.aside {
+  grid-column: 2;
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .rules {
+    grid-template-columns: minmax(0, 1fr);
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .aside {
+    grid-column: 1;
+    position: static;
+  }
+}
+
+.articles {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.articlesHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.articlesTitle {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 26px;
+  font-weight: 400;
+  text-shadow: 0 1px 0 #000;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.articlesNote {
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.articleText {
+  margin: 0;
+  color: #cdbd99;
+  font-size: 15px;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 8px;
+}
+
+// =============================================================================
+// RULE EXAMPLES
+// =============================================================================
+
+// Let tone affect only the leading stripe and icon color.
+
+.example {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+  color: #cdbd99;
+  font-size: 13px;
+  line-height: 1.5;
+
+  svg {
+    flex: 0 0 auto;
+    margin-top: 2px;
+  }
+
+  &[data-tone='positive'] {
+    border-left: 2px solid tokens.$success;
+
+    svg {
+      color: tokens.$success;
+    }
+  }
+
+  &[data-tone='negative'] {
+    border-left: 2px solid tokens.$warning;
+
+    svg {
+      color: tokens.$warning;
+    }
+  }
+}
+
+.consequences {
+  @include layout.container;
+  padding: 56px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.consequencesHead {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.consequencesKicker {
+  @include typography.kicker;
+}
+
+.consequencesText {
+  margin: 0;
+  max-width: 640px;
+  color: #cdbd99;
+  font-size: 15px;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.threat {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+}
+
+// =============================================================================
+// THREAT LEVEL CARDS
+// =============================================================================
+
+// Read each level's shared accent from --level-color.
+
+.level {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 20px;
+  border-right: 1px solid tokens.$border-panel;
+
+  &:last-child {
+    border-right-color: transparent;
+  }
+}
+
+.bar {
+  height: 6px;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-panel;
+}
+
+.barFill {
+  height: 100%;
+  background: var(--level-color);
+}
+
+.levelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.levelName {
+  color: var(--level-color);
+  font-family: tokens.$font-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.levelPercent {
+  color: tokens.$text-muted;
+  font-size: 11px;
+}
+
+.levelTitle {
+  color: tokens.$text-strong;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.levelText {
+  color: tokens.$text-subtle;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.levelDrop {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid tokens.$border-divider;
+  color: tokens.$text-secondary;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.levelDropLabel {
+  color: tokens.$text-muted;
+}
+
+.notices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  @include surfaces.panel;
+}
+
+.noticeKicker {
+  @include typography.kicker;
+}
+
+.noticeText {
+  margin: 0;
+  color: #cdbd99;
+  font-size: 14px;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.noticeLink {
+  color: tokens.$link;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .consequences {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  // Use a horizontal separator when the threat layout collapses to one column.
+  .threat {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .level {
+    border-right: 0;
+    border-bottom: 1px solid tokens.$border-panel;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}

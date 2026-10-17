@@ -1,0 +1,249 @@
+@use '../../styles/base/tokens';
+@use '../../styles/components/buttons';
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  background: linear-gradient(180deg, #16110a, tokens.$bg-panel);
+  border: 1px solid tokens.$border-panel;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+
+  &:hover {
+    border-color: tokens.$accent;
+    transform: translateY(-2px);
+  }
+
+  // Compact cards use tighter spacing, a flat background, and no hover lift.
+  &[data-compact='true'] {
+    position: relative;
+    gap: 10px;
+    padding: 14px;
+    background: tokens.$bg-panel;
+
+    &:hover {
+      border-color: tokens.$accent;
+      transform: none;
+    }
+  }
+}
+
+// =============================================================================
+// CORNER MARKER
+// =============================================================================
+
+// Reserve the corner marker for the state selected by the caller.
+
+.pin {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  color: tokens.$link;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.iconFrame {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+// =============================================================================
+// COMPACT ICON FRAME
+// =============================================================================
+
+// Use the supplied accent color for the compact icon frame.
+
+[data-compact='true'] {
+  .iconFrame {
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: tokens.$bg-page;
+    border: 1px solid tokens.$border-panel;
+  }
+
+  .icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 0;
+    object-position: left center;
+    filter: none;
+  }
+
+  .name {
+    font-size: 15px;
+  }
+
+  .meta {
+    font-size: 12px;
+  }
+
+  .expansionBadge {
+    padding: 1px 6px;
+    background: none;
+    font-size: 10px;
+  }
+
+  .footer {
+    padding-top: 0;
+    border-top: 0;
+    font-size: 12px;
+  }
+
+  .stats {
+    width: 100%;
+    gap: 10px;
+  }
+
+  // Push the update date to the far end of the row.
+  .updated {
+    margin-left: auto;
+  }
+}
+
+.titleBlock {
+  min-width: 0;
+}
+
+.name {
+  display: block;
+  overflow: hidden;
+  color: tokens.$text-strong;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+.meta {
+  margin-top: 2px;
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.previousVersion {
+  color: tokens.$border-frame-outer;
+  text-decoration: line-through;
+}
+
+.versionArrow {
+  flex: 0 0 auto;
+  display: inline-block;
+  margin: 0 3px;
+  vertical-align: -1px;
+}
+
+.newVersion {
+  color: tokens.$accent;
+}
+
+.expansionBadge {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--expansion-accent);
+  color: var(--expansion-accent);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.description {
+  margin: 0;
+  color: #bfae88;
+  font-size: 14px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid tokens.$border-divider;
+  color: tokens.$text-subtle;
+  font-size: 13px;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  color: tokens.$link;
+}
+
+.downloads {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.author {
+  color: tokens.$text-secondary;
+  text-decoration: none;
+}
+
+.updated {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.downloadButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  @include buttons.gold;
+  font-size: 13px;
+}

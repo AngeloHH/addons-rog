@@ -1,0 +1,293 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+
+// =============================================================================
+// PAGE HEIGHT
+// =============================================================================
+
+// Use flex layout so the section can fill the available height inside .app-shell.
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.notFound {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+  background: #000;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.35;
+  filter: saturate(0.6);
+}
+
+.radial,
+.fade {
+  position: absolute;
+  inset: 0;
+}
+
+.radial {
+  background: radial-gradient(
+    ellipse at 50% 60%,
+    rgba(12, 10, 8, 0.2) 0%,
+    rgba(12, 10, 8, 0.85) 55%,
+    tokens.$bg-page 100%
+  );
+}
+
+.fade {
+  background: linear-gradient(
+    180deg,
+    rgba(12, 10, 8, 0.6) 0%,
+    rgba(12, 10, 8, 0) 30%,
+    rgba(12, 10, 8, 0) 70%,
+    tokens.$bg-page 100%
+  );
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  max-width: tokens.$content-width;
+  min-height: 420px;
+  margin: 0 auto;
+  padding: 72px 24px 96px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+  align-items: center;
+  gap: 48px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 560px;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @include typography.kicker;
+}
+
+.kickerLine {
+  width: 28px;
+  height: 1px;
+  background: tokens.$accent;
+}
+
+.headline {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.code {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 112px;
+  font-weight: 700;
+  line-height: 0.9;
+  text-shadow:
+    0 3px 0 #000,
+    0 6px 18px rgba(0, 0, 0, 0.7);
+  animation: flicker 7s linear infinite;
+}
+
+.headlineText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 10px;
+}
+
+.title {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 22px;
+  font-weight: 400;
+  text-shadow: 0 1px 0 #000;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}
+
+.cooldown {
+  color: tokens.$text-muted;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+.text {
+  margin: 0;
+  color: #d9c9a5;
+  font-size: 17px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.path {
+  color: tokens.$text-heading;
+}
+
+.form {
+  display: flex;
+  padding: 8px;
+  @include surfaces.framed;
+}
+
+.searchIcon {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  color: tokens.$accent;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  min-height: 46px;
+  background: transparent;
+  border: 0;
+  color: tokens.$text-strong;
+  font-size: 16px;
+  outline: 0;
+}
+
+.searchButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 22px;
+  cursor: pointer;
+
+  @include buttons.gold;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  color: #e8d39a;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+
+  @include surfaces.control;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+  background: linear-gradient(180deg, rgba(27, 21, 12, 0.92), rgba(18, 14, 8, 0.95));
+  border: 1px solid tokens.$border-frame;
+  box-shadow: surfaces.$frame-shadow;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panelTitle {
+  @include typography.kicker;
+}
+
+.panelNote {
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.suggestions {
+  display: flex;
+  flex-direction: column;
+}
+
+.panelFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #2a2114;
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.portals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+@keyframes flicker {
+  0%,
+  92%,
+  94%,
+  98%,
+  100% {
+    opacity: 1;
+  }
+
+  93% {
+    opacity: 0.35;
+  }
+
+  97% {
+    opacity: 0.6;
+  }
+}
+
+@media (max-width: tokens.$mobile-max) {
+  // Hide the suggestions panel when it cannot fit on mobile screens.
+  .panel {
+    display: none;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+
+  .action {
+    flex: 1 1 auto;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  .inner {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}

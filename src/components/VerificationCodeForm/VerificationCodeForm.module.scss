@@ -1,0 +1,103 @@
+@use '../../styles/base/tokens';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+
+.form {
+  padding: 30px 26px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: center;
+}
+
+.icon {
+  width: 56px;
+  height: 56px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d9bd72;
+  @include surfaces.control;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  h2 {
+    margin: 0;
+    color: tokens.$text-heading;
+    font-family: tokens.$font-display;
+    font-size: 22px;
+    font-weight: 400;
+    text-shadow: 0 1px 0 #000;
+    text-transform: uppercase;
+    word-spacing: 0.3em;
+  }
+
+  p {
+    margin: 0;
+    color: #bfae88;
+    font-size: 14px;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  strong {
+    color: tokens.$text-heading;
+  }
+}
+
+.codeBoxes {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+
+  input {
+    width: 48px;
+    height: 56px;
+    padding: 0;
+    color: tokens.$text-heading;
+    background: tokens.$bg-page;
+    border: 1px solid tokens.$border-control;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 0 0 1px #15120e;
+    caret-color: tokens.$link;
+    font-family: tokens.$font-serif;
+    font-size: 22px;
+    font-weight: 700;
+    outline: none;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+.submit {
+  min-height: 48px;
+  color: #231806;
+  @include buttons.gold-surface;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 240, 200, 0.4);
+}
+
+.help {
+  margin: 0;
+  color: tokens.$text-muted;
+  font-size: 13px;
+  line-height: 1.6;
+
+  button {
+    padding: 0;
+    color: tokens.$link;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+  }
+}

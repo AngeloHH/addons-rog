@@ -1,0 +1,6 @@
+@use '../../styles/base/layout';
+
+.status {
+  @include layout.centered;
+  padding: 32px 24px;
+}

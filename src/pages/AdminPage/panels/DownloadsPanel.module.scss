@@ -1,0 +1,50 @@
+@use '../../../styles/base/tokens';
+
+// =============================================================================
+// TOP DOWNLOADS
+// =============================================================================
+
+// Place the download ranking below the chart.
+
+.top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid tokens.$border-divider;
+}
+
+.topItem {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.topRank {
+  color: tokens.$text-muted;
+  font-family: tokens.$font-serif;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.topName {
+  overflow: hidden;
+  color: tokens.$text-secondary;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+.topCount {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: tokens.$text-subtle;
+  font-size: 12px;
+}

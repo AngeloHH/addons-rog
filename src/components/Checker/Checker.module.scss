@@ -1,0 +1,156 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+
+.checker {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  @include surfaces.framed;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kicker {
+  @include typography.kicker;
+}
+
+.title {
+  @include typography.title(20px);
+}
+
+.note {
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+}
+
+.questionText {
+  color: tokens.$text-input;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.options {
+  display: flex;
+  gap: 4px;
+}
+
+// Apply the answer tone only to the selected option.
+.option {
+  flex: 1;
+  min-height: 32px;
+  background: linear-gradient(180deg, rgba(40, 36, 30, 0.85), rgba(14, 12, 9, 0.9));
+  border: 1px solid tokens.$border-control;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+
+  &[data-selected='true'][data-tone='accept'] {
+    background: linear-gradient(180deg, #f1d68a, #b8892f);
+    border-color: #2a2118;
+    color: #231806;
+  }
+
+  &[data-selected='true'][data-tone='reject'] {
+    background: linear-gradient(180deg, #4a2418, #2a140c);
+    border-color: tokens.$warning;
+    color: tokens.$text-strong;
+  }
+}
+
+.verdict {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-control;
+
+  &[data-tone='warning'] {
+    border-color: tokens.$accent;
+
+    .diamond {
+      background: tokens.$accent;
+      border-color: tokens.$accent;
+    }
+  }
+
+  &[data-tone='danger'] {
+    background: rgba(227, 154, 106, 0.06);
+    border-color: tokens.$warning;
+
+    .diamond {
+      background: tokens.$warning;
+      border-color: tokens.$warning;
+    }
+  }
+
+  &[data-tone='success'] {
+    background: rgba(143, 201, 138, 0.06);
+    border-color: tokens.$success;
+
+    .diamond {
+      background: tokens.$success;
+      border-color: tokens.$success;
+    }
+  }
+}
+
+.verdictTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: tokens.$text-strong;
+  font-weight: 700;
+}
+
+.diamond {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  background: tokens.$border-control;
+  border: 1px solid tokens.$border-control;
+  transform: rotate(45deg);
+}
+
+.verdictText {
+  color: #cdbd99;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.verdictAction {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 9px 16px;
+  font-size: 13px;
+
+  @include buttons.gold;
+}

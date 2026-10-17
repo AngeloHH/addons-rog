@@ -1,0 +1,90 @@
+@use './tokens';
+
+:root {
+  color: tokens.$text-heading;
+  background: tokens.$bg-page;
+  font-family: tokens.$font-body;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(18, 14, 9, 0.75), rgba(8, 7, 6, 0.95)),
+    url('/assets/slide1.png') center / cover fixed;
+}
+
+a {
+  color: inherit;
+}
+
+select {
+  color-scheme: dark;
+}
+
+select option,
+select optgroup {
+  background-color: #000;
+  color: tokens.$text-input;
+}
+
+select option:disabled {
+  color: tokens.$text-muted;
+}
+
+.site-frame {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: tokens.$bg-page;
+}
+
+.app-shell {
+  flex: 1;
+}
+
+h1 {
+  margin: 0;
+  font-family: tokens.$font-display;
+  font-size: clamp(42px, 8vw, 76px);
+  font-weight: 400;
+  line-height: 0.95;
+  text-transform: uppercase;
+  text-shadow: 0 2px 0 #000;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  [data-m-hide] {
+    display: none !important;
+  }
+
+  [data-m-show] {
+    display: flex !important;
+  }
+
+  [data-m-collapsible][data-open='false'] {
+    display: none !important;
+  }
+
+  [data-m-sticky-off] {
+    position: static !important;
+  }
+}
+
+// =============================================================================
+// ANCHOR TARGET OFFSET
+// =============================================================================
+
+// Keep anchor destinations visible below the fixed header.
+
+.app-shell [id] {
+  scroll-margin-top: 84px;
+}

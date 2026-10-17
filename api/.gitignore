@@ -1,0 +1,10 @@
+/config/config.local.php
+/config/setup.token.json
+/config/setup.pending.json
+/config/setup.pending.php
+/config/install.lock
+/config/.install.guard
+/config/.setup-*
+/storage/*
+!/storage/.gitkeep
+/tests/.runtime/

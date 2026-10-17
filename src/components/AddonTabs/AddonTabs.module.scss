@@ -1,0 +1,30 @@
+@use '../../styles/base/tokens';
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  border-top: 1px solid #2a2620;
+}
+
+.tab {
+  margin-bottom: -1px;
+  padding: 12px 18px;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+
+  &[data-active='true'] {
+    border-bottom-color: tokens.$accent-muted;
+    color: tokens.$text-heading;
+  }
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}

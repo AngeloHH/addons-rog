@@ -1,0 +1,258 @@
+[
+  {
+    "method": "GET",
+    "url": "/api/setup/status"
+  },
+  {
+    "method": "GET",
+    "url": "/api/setup/requirements"
+  },
+  {
+    "method": "POST",
+    "url": "/api/setup/database"
+  },
+  {
+    "method": "POST",
+    "url": "/api/setup/install"
+  },
+  {
+    "method": "GET",
+    "url": "/api/default-icon.svg"
+  },
+  {
+    "method": "POST",
+    "url": "/api/auth/invitations/accept"
+  },
+  {
+    "method": "GET",
+    "url": "/api/admin/activity/export"
+  },
+  {
+    "method": "POST",
+    "url": "/api/auth/verify/resend"
+  },
+  {
+    "method": "POST",
+    "url": "/api/admin/invitations"
+  },
+  {
+    "method": "GET",
+    "url": "/api/addons/check-name"
+  },
+  {
+    "method": "GET",
+    "url": "/api/admin/submissions"
+  },
+  {
+    "method": "GET",
+    "url": "/api/admin/dashboard"
+  },
+  {
+    "method": "GET",
+    "url": "/api/admin/accounts"
+  },
+  {
+    "method": "GET",
+    "url": "/api/admin/activity"
+  },
+  {
+    "method": "POST",
+    "url": "/api/auth/register"
+  },
+  {
+    "method": "GET",
+    "url": "/api/admin/reports"
+  },
+  {
+    "method": "GET",
+    "url": "/api/admin/counts"
+  },
+  {
+    "method": "GET",
+    "url": "/api/auth/session"
+  },
+  {
+    "method": "POST",
+    "url": "/api/auth/logout"
+  },
+  {
+    "method": "POST",
+    "url": "/api/auth/verify"
+  },
+  {
+    "method": "POST",
+    "url": "/api/submissions"
+  },
+  {
+    "method": "GET",
+    "url": "/api/admin/stats"
+  },
+  {
+    "method": "GET",
+    "url": "/api/submissions"
+  },
+  {
+    "method": "POST",
+    "url": "/api/auth/login"
+  },
+  {
+    "method": "GET",
+    "url": "/api/admin/live"
+  },
+  {
+    "method": "GET",
+    "url": "/api/site/stats"
+  },
+  {
+    "method": "POST",
+    "url": "/api/requests"
+  },
+  {
+    "method": "GET",
+    "url": "/api/requests"
+  },
+  {
+    "method": "GET",
+    "url": "/api/taxonomy"
+  },
+  {
+    "method": "POST",
+    "url": "/api/contact"
+  },
+  {
+    "method": "POST",
+    "url": "/api/reports"
+  },
+  {
+    "method": "POST",
+    "url": "/api/uploads"
+  },
+  {
+    "method": "GET",
+    "url": "/api/contact"
+  },
+  {
+    "method": "GET",
+    "url": "/api/addons"
+  },
+  {
+    "method": "GET",
+    "url": "/api/health"
+  },
+  {
+    "method": "POST",
+    "url": "/api/media"
+  },
+  {
+    "method": "GET",
+    "url": "/api/about"
+  },
+  {
+    "method": "GET",
+    "url": "/api/home"
+  },
+  {
+    "method": "POST",
+    "url": "/api/admin/requests/{requestId}/notify-authors"
+  },
+  {
+    "method": "POST",
+    "url": "/api/admin/submissions/{submissionId}/decision"
+  },
+  {
+    "method": "GET",
+    "url": "/api/admin/submissions/{submissionId}/file"
+  },
+  {
+    "method": "POST",
+    "url": "/api/admin/accounts/{accountId}/message"
+  },
+  {
+    "method": "POST",
+    "url": "/api/admin/requests/{requestId}/action"
+  },
+  {
+    "method": "POST",
+    "url": "/api/submissions/{submissionId}/submit"
+  },
+  {
+    "method": "GET",
+    "url": "/api/admin/submissions/{submissionId}"
+  },
+  {
+    "method": "POST",
+    "url": "/api/admin/reports/{reportId}/action"
+  },
+  {
+    "method": "PATCH",
+    "url": "/api/admin/accounts/{accountId}"
+  },
+  {
+    "method": "PATCH",
+    "url": "/api/submissions/{submissionId}"
+  },
+  {
+    "method": "PUT",
+    "url": "/api/requests/{requestId}/follow"
+  },
+  {
+    "method": "GET",
+    "url": "/api/download-files/{versionId}"
+  },
+  {
+    "method": "GET",
+    "url": "/api/submissions/{submissionId}"
+  },
+  {
+    "method": "PUT",
+    "url": "/api/requests/{requestId}/vote"
+  },
+  {
+    "method": "GET",
+    "url": "/api/users/{username}/journal"
+  },
+  {
+    "method": "GET",
+    "url": "/api/users/{username}/reviews"
+  },
+  {
+    "method": "PUT",
+    "url": "/api/addons/{slug}/my-comment"
+  },
+  {
+    "method": "GET",
+    "url": "/api/packs/{packId}/download"
+  },
+  {
+    "method": "GET",
+    "url": "/api/users/{username}/addons"
+  },
+  {
+    "method": "PUT",
+    "url": "/api/users/{username}/follow"
+  },
+  {
+    "method": "GET",
+    "url": "/api/addons/{slug}/comments"
+  },
+  {
+    "method": "PUT",
+    "url": "/api/addons/{slug}/favorite"
+  },
+  {
+    "method": "GET",
+    "url": "/api/downloads/{versionId}"
+  },
+  {
+    "method": "GET",
+    "url": "/api/profiles/{username}"
+  },
+  {
+    "method": "GET",
+    "url": "/api/files/{fileId}"
+  },
+  {
+    "method": "GET",
+    "url": "/api/addons/{slug}"
+  }
+]

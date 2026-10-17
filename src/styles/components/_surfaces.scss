@@ -1,0 +1,35 @@
+@use '../base/tokens';
+
+$frame-shadow:
+  inset 0 1px 0 rgba(255, 235, 190, 0.08),
+  0 0 0 1px #17130e,
+  0 0 0 3px #4a4438,
+  0 0 0 4px #1a1612,
+  0 0 0 5px tokens.$border-frame-outer;
+
+@mixin panel {
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+@mixin framed {
+  background: linear-gradient(180deg, #1b150c, #120e08);
+  border: 1px solid tokens.$border-frame;
+  box-shadow: $frame-shadow;
+}
+
+@mixin hero {
+  background: linear-gradient(180deg, #120e09 0%, tokens.$bg-page 100%);
+  border-bottom: 1px solid #2a2620;
+  box-shadow: inset 0 -1px 0 #0a0908;
+}
+
+@mixin control {
+  background: linear-gradient(180deg, rgba(40, 36, 30, 0.85), rgba(14, 12, 9, 0.9));
+  border: 1px solid tokens.$border-control;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px #15120e,
+    0 2px 4px rgba(0, 0, 0, 0.6);
+}

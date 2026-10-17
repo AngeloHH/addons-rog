@@ -1,0 +1,45 @@
+@use '../../styles/base/tokens';
+
+.motes {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mote {
+  position: absolute;
+  top: var(--top);
+  left: var(--left);
+  width: var(--size);
+  height: var(--size);
+  background: var(--background);
+  border: 1px solid tokens.$accent;
+  opacity: var(--opacity);
+  animation: drift var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(45deg);
+  }
+
+  50% {
+    transform: translate(6px, -10px) rotate(45deg);
+  }
+}
+
+// =============================================================================
+// REDUCED MOTION
+// =============================================================================
+
+// Keep decorative particles still when the system requests less motion.
+
+@media (prefers-reduced-motion: reduce) {
+  .mote {
+    animation: none;
+    transform: rotate(45deg);
+  }
+}

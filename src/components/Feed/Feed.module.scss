@@ -1,0 +1,79 @@
+@use '../../styles/base/tokens';
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+// =============================================================================
+// NEW ACTIVITY
+// =============================================================================
+
+// Fade newly added entries from their initial highlight.
+
+.item {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-bottom: 1px solid #1a1409;
+  transition: background 1.2s ease;
+
+  &[data-fresh='true'] {
+    background: #1c150a;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.image {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+  object-fit: cover;
+  object-position: left center;
+}
+
+.text {
+  overflow: hidden;
+  color: #cdbd99;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  strong {
+    color: tokens.$text-heading;
+    font-weight: 600;
+  }
+
+  em {
+    color: tokens.$text-muted;
+    font-style: normal;
+  }
+
+  b {
+    color: tokens.$text-strong;
+    font-weight: 600;
+  }
+
+  // Frame highlighted text using the color supplied by the caller.
+  mark {
+    padding: 1px 5px;
+    border: 1px solid var(--tag-color, tokens.$border-control);
+    background: none;
+    color: var(--tag-color, tokens.$text-muted);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
+
+.when {
+  color: tokens.$border-frame-outer;
+  font-size: 11px;
+  white-space: nowrap;
+}

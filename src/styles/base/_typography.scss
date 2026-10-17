@@ -1,0 +1,23 @@
+@use './tokens';
+
+@mixin kicker {
+  color: tokens.$accent-muted;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin title($size) {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: $size;
+  font-weight: 400;
+  text-transform: uppercase;
+  word-spacing: 0.3em;
+}

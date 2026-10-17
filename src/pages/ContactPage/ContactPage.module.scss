@@ -1,0 +1,472 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/layout';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+
+.status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.statusPill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  color: tokens.$text-secondary;
+  font-weight: 600;
+
+  @include surfaces.control;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: tokens.$success;
+}
+
+.mailbox {
+  @include layout.container;
+  padding: 36px 24px 80px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  align-items: start;
+  gap: 36px;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 0;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stepHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stepLabel {
+  @include typography.kicker;
+}
+
+.stepLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, #4a3a1c, transparent);
+}
+
+.attach {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+  color: tokens.$text-subtle;
+  cursor: pointer;
+  font-size: 13px;
+
+  input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  input:focus-visible + .attachButton {
+    outline: 2px solid tokens.$accent;
+    outline-offset: 3px;
+  }
+}
+
+.attachButton {
+  flex-shrink: 0;
+  padding: 7px 12px;
+  color: tokens.$text-secondary;
+  font-weight: 600;
+
+  @include surfaces.control;
+}
+
+.attachName {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.people {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.noRecipients {
+  margin: 0;
+  color: tokens.$text-muted;
+}
+
+// =============================================================================
+// CONTACT RECIPIENT CARDS
+// =============================================================================
+
+// Keep idle borders muted and frame the selected recipient in gold.
+
+.person {
+  --state-color: #{tokens.$success};
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 10px;
+  padding: 16px;
+  background: linear-gradient(180deg, #16110a, tokens.$bg-panel);
+  border: 1px solid tokens.$border-panel;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  overflow-wrap: anywhere;
+  transition: border-color 0.25s ease;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+
+  &[data-status='reviewing'] {
+    --state-color: #{tokens.$accent};
+  }
+
+  &[data-selected='true'] {
+    border-color: tokens.$accent;
+    box-shadow:
+      0 0 0 1px tokens.$accent,
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+}
+
+.personHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.personInitial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+  color: var(--person-accent);
+  font-family: tokens.$font-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.personState {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--state-color);
+  font-size: 11px;
+}
+
+.personStateDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--state-color);
+}
+
+.personName {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.personTitle {
+  color: tokens.$text-strong;
+  font-weight: 700;
+}
+
+.personRole {
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.personHandles {
+  color: tokens.$text-subtle;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topic {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  background: linear-gradient(180deg, rgba(40, 36, 30, 0.85), rgba(14, 12, 9, 0.9));
+  border: 1px solid tokens.$border-control;
+  box-shadow: 0 0 0 1px #15120e;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+
+  &[data-selected='true'] {
+    background: linear-gradient(180deg, #f1d68a, #b8892f);
+    border-color: #2a2118;
+    color: #231806;
+
+    .topicDot {
+      background: #231806;
+    }
+  }
+}
+
+.topicDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--topic-dot);
+}
+
+.hint {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+  border-left: 2px solid tokens.$accent;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  color: #cdbd99;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.hintLabel {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: tokens.$accent;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hintLink {
+  color: tokens.$link;
+}
+
+.aside {
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  @include surfaces.panel;
+}
+
+.panelKicker {
+  @include typography.kicker;
+}
+
+.envelope {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: linear-gradient(160deg, #1c150a, tokens.$bg-page);
+  border: 1px solid tokens.$border-frame-outer;
+}
+
+// =============================================================================
+// ENVELOPE STAMP
+// =============================================================================
+
+// Place the decorative postmark in the corner.
+
+.stamp {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 60px;
+  height: 60px;
+  background: #2a2114;
+  border: 1px solid #4a3a1c;
+  transform: rotate(45deg);
+}
+
+.letter {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px 12px;
+  font-size: 13px;
+
+  dt {
+    color: tokens.$text-muted;
+  }
+
+  dd {
+    margin: 0;
+    color: tokens.$text-input;
+  }
+}
+
+.letterTo {
+  color: tokens.$text-heading;
+  font-weight: 600;
+}
+
+.letterSubject {
+  @include typography.ellipsis;
+}
+
+.eta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid #2a2114;
+}
+
+.etaHead {
+  display: flex;
+  justify-content: space-between;
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.etaValue {
+  color: tokens.$text-heading;
+  font-weight: 600;
+}
+
+.bar {
+  height: 6px;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-panel;
+}
+
+.barFill {
+  height: 100%;
+  background: linear-gradient(90deg, #8e6520, #e0bb62);
+  transition: width 0.4s ease;
+}
+
+.way {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  color: tokens.$text-secondary;
+  text-decoration: none;
+
+  @include surfaces.control;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+}
+
+.wayText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.wayTitle {
+  font-weight: 600;
+}
+
+.wayNote {
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  text-align: center;
+}
+
+.weekItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.weekValue {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.weekLabel {
+  color: tokens.$text-muted;
+  font-size: 11px;
+}
+
+@media (max-width: tokens.$tablet-max) {
+  .people {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .mailbox {
+    grid-template-columns: minmax(0, 1fr);
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .status {
+    align-items: flex-start;
+  }
+
+  .people {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aside {
+    position: static;
+  }
+}

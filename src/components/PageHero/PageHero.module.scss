@@ -1,0 +1,86 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/layout';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 48px 24px 40px;
+  @include surfaces.hero;
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 15% 0%, rgba(200, 162, 74, 0.1), transparent 55%);
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  @include layout.centered;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 32px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 720px;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @include typography.kicker;
+}
+
+.kickerLine {
+  width: 28px;
+  height: 1px;
+  background: tokens.$accent;
+}
+
+.title {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.08;
+  text-shadow:
+    0 2px 0 #000,
+    0 3px 8px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  text-wrap: balance;
+  word-spacing: 0.3em;
+}
+
+.text {
+  margin: 0;
+  color: #bfae88;
+  font-size: 16px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .hero {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 1.1;
+  }
+}

@@ -1,0 +1,15 @@
+@use '../../styles/base/tokens';
+
+.pill {
+  padding: 4px 9px;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-panel;
+  color: tokens.$text-secondary;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+a.pill:hover {
+  border-color: tokens.$accent;
+  color: tokens.$text-hover;
+}

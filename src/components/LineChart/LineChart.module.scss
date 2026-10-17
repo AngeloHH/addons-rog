@@ -1,0 +1,147 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  @include typography.title(16px);
+}
+
+.note {
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+// =============================================================================
+// SERIES LEGEND
+// =============================================================================
+
+// Represent each series with a solid or dotted line sample.
+
+.swatch {
+  width: 14px;
+  height: 2px;
+  background: tokens.$link;
+
+  &[data-tone='muted'] {
+    height: 0;
+    background: none;
+    border-top: 2px dashed tokens.$border-control;
+  }
+}
+
+.body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+}
+
+.yAxis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  color: tokens.$border-frame-outer;
+  font-size: 11px;
+  text-align: right;
+}
+
+.plotWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+// =============================================================================
+// PLOT GRID
+// =============================================================================
+
+// Draw background grid lines with a repeating gradient.
+
+.plot {
+  position: relative;
+  background: repeating-linear-gradient(180deg, transparent 0 79px, #1a1409 79px 80px);
+  border-bottom: 1px solid tokens.$border-panel;
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  width: 100%;
+  height: 100%;
+}
+
+.line {
+  stroke: tokens.$link;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+
+  &[data-tone='muted'] {
+    stroke: tokens.$border-control;
+    stroke-width: 1.5;
+  }
+
+  &[data-dashed='true'] {
+    stroke-dasharray: 3 3;
+  }
+}
+
+// =============================================================================
+// POINT MARKERS
+// =============================================================================
+
+// Center each marker on its plotted position.
+
+.dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  background: #f1d68a;
+  border: 1px solid #2a2118;
+  box-shadow: 0 0 0 2px tokens.$bg-panel;
+  transform: rotate(45deg);
+}
+
+.xAxis {
+  display: flex;
+  justify-content: space-between;
+  color: tokens.$border-frame-outer;
+  font-size: 11px;
+}

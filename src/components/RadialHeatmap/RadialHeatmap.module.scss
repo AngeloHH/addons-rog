@@ -1,0 +1,53 @@
+@use '../../styles/base/tokens';
+
+.wrap {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  justify-self: center;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.label {
+  fill: tokens.$text-muted;
+  font-family: tokens.$font-serif;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+// =============================================================================
+// CENTER LABEL
+// =============================================================================
+
+// Let pointer events pass through the center so tooltips remain accessible.
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.centerValue {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.centerLabel {
+  color: tokens.$text-muted;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+}

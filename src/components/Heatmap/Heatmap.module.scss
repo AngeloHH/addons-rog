@@ -1,0 +1,50 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  @include surfaces.panel;
+}
+
+.title {
+  @include typography.kicker;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--heatmap-columns, 7), minmax(0, 1fr));
+  gap: 4px;
+}
+
+// =============================================================================
+// CELL INTENSITY
+// =============================================================================
+
+// Use four levels ranging from muted to gold.
+
+.cell {
+  aspect-ratio: 1;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-divider;
+
+  &[data-level='1'] {
+    background: #3d2f14;
+  }
+
+  &[data-level='2'] {
+    background: tokens.$border-frame;
+  }
+
+  &[data-level='3'] {
+    background: #e0bb62;
+  }
+}
+
+.note {
+  color: tokens.$text-muted;
+  font-size: 12px;
+}

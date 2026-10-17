@@ -1,0 +1,421 @@
+@use '../../styles/base/tokens';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+
+.row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  padding: 14px 16px;
+  border-bottom: 1px solid tokens.$border-divider;
+  transition: background 0.2s ease;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background: #171208;
+  }
+
+  // Keep compact records in a fixed grid without wrapping their columns.
+  &[data-compact='true'] {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    gap: 12px 14px;
+    padding: 12px 18px;
+    align-items: center;
+  }
+
+  // Use the score box as the compact row's leading column.
+  &[data-compact='true']:has(.score) {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    padding: 10px 18px;
+  }
+
+  // Use the accent stripe as the leading column and align the content at the top.
+  &[data-compact='true']:has(.accent) {
+    grid-template-columns: 4px minmax(0, 1fr) auto;
+    padding: 12px 18px 12px 14px;
+    align-items: start;
+  }
+
+  // Use the row border as the accent stripe in the full layout.
+  &[data-compact='false']:has(.accent) {
+    padding: 14px 16px 14px 12px;
+    border-left: 4px solid var(--row-accent);
+  }
+}
+
+// =============================================================================
+// ACCENT STRIPES
+// =============================================================================
+
+// Draw a separate stripe only in compact rows; full rows use their border.
+
+.accent {
+  align-self: stretch;
+  width: 4px;
+  background: var(--row-accent);
+
+  [data-compact='false'] & {
+    display: none;
+  }
+}
+
+.image {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+  object-fit: cover;
+  object-position: left center;
+
+  [data-compact='true'] & {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 320px;
+  min-width: 0;
+
+  [data-compact='true'] & {
+    gap: 3px;
+    flex: initial;
+  }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.title {
+  color: tokens.$text-strong;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+// =============================================================================
+// RECORD TAGS
+// =============================================================================
+
+// Keep tags without a custom color muted and unframed.
+
+.tag {
+  color: tokens.$text-muted;
+  font-size: 12px;
+
+  &[style*='--tag-color'] {
+    color: var(--tag-color);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  // Frame colored tags unless the supplied data requests a plain label.
+  &[style*='--tag-color'][data-plain='false'] {
+    padding: 1px 6px;
+    border: 1px solid var(--tag-color);
+  }
+}
+
+.text {
+  color: tokens.$text-input;
+  font-size: 14px;
+  line-height: 1.5;
+
+  a {
+    color: tokens.$text-strong;
+    font-weight: 700;
+    text-decoration: none;
+
+    &:hover {
+      color: tokens.$text-hover;
+    }
+  }
+
+  [data-compact='true'] & {
+    line-height: 1.45;
+  }
+}
+
+.meta {
+  color: tokens.$text-subtle;
+  font-size: 12px;
+
+  a {
+    color: tokens.$text-secondary;
+    text-decoration: none;
+
+    &:hover {
+      color: tokens.$text-hover;
+    }
+  }
+}
+
+.flag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: tokens.$warning;
+  font-size: 12px;
+
+  svg {
+    flex: 0 0 auto;
+  }
+
+  &[data-tone='ok'] {
+    color: tokens.$success;
+  }
+
+  &[data-tone='warning'] {
+    color: tokens.$accent;
+  }
+}
+
+.note {
+  padding: 6px 10px;
+  background: tokens.$bg-page;
+  border-left: 2px solid tokens.$border-frame-outer;
+  color: #cdbd99;
+  font-size: 12px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  background: linear-gradient(180deg, rgba(40, 36, 30, 0.85), rgba(14, 12, 9, 0.9));
+  border: 1px solid tokens.$border-control;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px #15120e;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+
+  svg {
+    flex: 0 0 auto;
+  }
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+
+  // Keep icon-only action buttons square and hide their text.
+  &[data-icon-only='true'] {
+    width: 34px;
+    padding: 0;
+  }
+
+  &[data-tone='ok'] {
+    color: tokens.$success;
+  }
+
+  &[data-tone='warning'] {
+    color: tokens.$accent;
+  }
+
+  &[data-tone='danger'] {
+    color: tokens.$warning;
+  }
+
+  &[data-tone='muted'] {
+    color: tokens.$text-muted;
+  }
+
+  &[data-variant='gold'] {
+    height: 34px;
+    padding: 0 12px;
+    font-size: 13px;
+
+    @include buttons.gold;
+  }
+}
+
+.menu {
+  position: relative;
+  display: flex;
+}
+
+// =============================================================================
+// ACTION MENUS
+// =============================================================================
+
+// Anchor the menu below its button and align their right edges.
+
+.menuList {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  padding: 6px;
+  background: linear-gradient(180deg, #1b150c, #120e08);
+  border: 1px solid tokens.$border-frame;
+  box-shadow:
+    0 0 0 1px #17130e,
+    0 0 0 3px #4a4438,
+    0 0 0 4px #1a1612,
+    0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+// =============================================================================
+// MENU OPTIONS
+// =============================================================================
+
+// Separate adjacent options with a thin line.
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 0 12px;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid #2a2114;
+  color: tokens.$text-secondary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background: #2a2114;
+    color: tokens.$text-hover;
+  }
+
+  &[data-tone='ok'] {
+    color: tokens.$success;
+  }
+
+  &[data-tone='warning'] {
+    color: tokens.$accent;
+  }
+
+  &[data-tone='danger'] {
+    color: tokens.$warning;
+  }
+
+  &[data-tone='muted'] {
+    color: tokens.$text-muted;
+  }
+}
+
+// =============================================================================
+// SCORE COLUMN
+// =============================================================================
+
+// Use the vote box as the leading column, like a record image.
+
+.score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48px;
+  flex: 0 0 auto;
+  padding: 6px 0;
+  @include surfaces.control;
+  color: tokens.$link;
+  font-family: tokens.$font-serif;
+  font-size: 15px;
+  font-weight: 700;
+
+  [data-compact='true'] & {
+    width: 44px;
+    padding: 4px 0;
+    font-size: 14px;
+  }
+}
+
+// =============================================================================
+// TIME COLUMN
+// =============================================================================
+
+// Right-align timestamps in their leading column.
+
+.time {
+  width: 64px;
+  flex: 0 0 auto;
+  padding-right: 6px;
+  color: tokens.$border-frame-outer;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+// =============================================================================
+// INITIAL MARKERS
+// =============================================================================
+
+// Reuse the score-box shape with a letter inside.
+
+.initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  background: var(--initial-background, #2a2114);
+  border: 1px solid tokens.$border-panel;
+  color: var(--initial-color, tokens.$text-secondary);
+  font-family: tokens.$font-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+// =============================================================================
+// TRAILING BADGES
+// =============================================================================
+
+// Place a badge at the end of records without action buttons.
+
+.badge {
+  margin-left: auto;
+  padding: 2px 7px;
+  border: 1px solid var(--badge-color, tokens.$border-control);
+  color: var(--badge-color, tokens.$text-secondary);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}

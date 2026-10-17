@@ -1,0 +1,606 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+
+$tones: (
+  muted: tokens.$text-muted,
+  ok: tokens.$success,
+  warning: tokens.$link,
+  danger: #d95a5a,
+);
+
+.page {
+  flex: 1;
+  padding-bottom: 72px;
+  color: tokens.$text-input;
+  background:
+    linear-gradient(180deg, rgba(12, 10, 8, 0.48), tokens.$bg-page 550px),
+    url('/assets/slide1.png') center top / cover no-repeat tokens.$bg-page;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px max(24px, calc((100vw - 1160px) / 2));
+  color: #a89263;
+  background: #080706;
+  border-bottom: 1px solid #2a2114;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+.lockNotice {
+  color: tokens.$warning;
+}
+
+// =============================================================================
+// INSTALLER HEADER
+// =============================================================================
+
+
+.hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 44px 20px 30px;
+  text-align: center;
+}
+
+.logo {
+  display: block;
+  width: auto;
+  height: 64px;
+  margin: 0 auto 12px;
+  filter: drop-shadow(0 2px 6px #000);
+}
+
+.kicker {
+  @include typography.kicker;
+}
+
+.title {
+  margin: 8px 0 14px;
+  font-size: clamp(32px, 5vw, 44px);
+  line-height: 1.15;
+  word-spacing: 0.3em;
+}
+
+.intro {
+  max-width: 640px;
+  margin: 0 auto;
+  color: #bfae88;
+}
+
+// =============================================================================
+// INSTALLATION STEPS
+// =============================================================================
+
+
+.rail {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  max-width: 900px;
+  margin: 0 auto 22px;
+  padding: 0;
+  list-style: none;
+}
+
+.railStep {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px;
+  color: tokens.$border-frame-outer;
+  background: rgba(8, 7, 6, 0.6);
+  border-bottom: 2px solid tokens.$border-divider;
+  font-size: 13px;
+
+  &[data-state='active'] {
+    color: tokens.$text-heading;
+    background: #171208;
+    border-color: tokens.$accent-muted;
+  }
+
+  &[data-state='done'] {
+    color: tokens.$text-secondary;
+    border-color: #4a3a1c;
+  }
+}
+
+.railNumber {
+  display: grid;
+  flex: 0 0 26px;
+  place-items: center;
+  height: 26px;
+  color: tokens.$border-frame-outer;
+  background: tokens.$bg-page;
+  border: 1px solid #3d2f14;
+  font-family: tokens.$font-serif;
+  font-size: 12px;
+
+  [data-state='active'] > & {
+    color: #231806;
+    background: linear-gradient(180deg, #f1d68a, #b8892f);
+    border-color: #2a2118;
+  }
+
+  [data-state='done'] > & {
+    color: tokens.$success;
+    border-color: tokens.$success;
+  }
+}
+
+.railLabel {
+  @include typography.ellipsis;
+}
+
+// =============================================================================
+// STEP CARD
+// =============================================================================
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px;
+  background: linear-gradient(180deg, rgba(27, 21, 12, 0.97), rgba(18, 14, 8, 0.99));
+  border: 1px solid tokens.$border-frame;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 235, 190, 0.08),
+    0 0 0 2px #17130e,
+    0 0 0 4px #4a4438,
+    0 12px 40px rgba(0, 0, 0, 0.55);
+}
+
+.subheading {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 18px;
+}
+
+.note {
+  margin: 0;
+  padding: 12px 14px;
+  color: #cdbd99;
+  background: #130f0a;
+  border-left: 2px solid tokens.$border-frame;
+  font-size: 13px;
+
+  @each $tone, $color in $tones {
+    &[data-tone='#{$tone}'] {
+      @if $tone != muted {
+        color: $color;
+        border-color: $color;
+      }
+    }
+  }
+}
+
+.noteLink {
+  color: tokens.$link;
+}
+
+// =============================================================================
+// FORM FIELDS
+// =============================================================================
+
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+
+  &[data-wide='true'] {
+    grid-column: 1 / -1;
+  }
+}
+
+.fieldLabel {
+  color: tokens.$text-secondary;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.fieldHint {
+  color: #958260;
+  font-size: 12px;
+}
+
+.fieldStatus {
+  font-size: 12px;
+
+  @each $tone, $color in $tones {
+    &[data-tone='#{$tone}'] {
+      color: $color;
+    }
+  }
+}
+
+.input {
+  @include surfaces.control;
+
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  color: tokens.$text-input;
+  border-radius: 0;
+  outline: none;
+  font: 14px tokens.$font-sans;
+
+  &::placeholder {
+    color: #8a7a5a;
+  }
+
+  &:focus-visible {
+    border-color: #dfba65;
+  }
+
+  &:disabled {
+    opacity: 0.65;
+  }
+
+  &[readonly] {
+    color: #a89263;
+  }
+
+  &[data-invalid='true'] {
+    border-color: #d95a5a;
+  }
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px;
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+}
+
+.toggleText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: tokens.$text-secondary;
+  font-size: 13px;
+  cursor: pointer;
+
+  input {
+    accent-color: tokens.$accent-muted;
+  }
+}
+
+.strength {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.strengthBar {
+  height: 4px;
+  background: tokens.$border-divider;
+
+  @each $tone, $color in $tones {
+    &[data-filled='true'][data-tone='#{$tone}'] {
+      background: $color;
+    }
+  }
+}
+
+.role {
+  color: tokens.$text-hover;
+}
+
+// =============================================================================
+// REQUIREMENT CHECKS
+// =============================================================================
+
+
+.checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px;
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+  font-size: 13px;
+}
+
+.checkMark {
+  flex: 0 0 18px;
+  font-weight: 700;
+  text-align: center;
+
+  @each $tone, $color in $tones {
+    &[data-tone='#{$tone}'] {
+      color: $color;
+    }
+  }
+}
+
+.checkText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.checkLabel {
+  color: tokens.$text-strong;
+  font-weight: 600;
+}
+
+.checkHint {
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.checkValue {
+  color: #a18d67;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+// =============================================================================
+// REVIEW AND INSTALLATION
+// =============================================================================
+
+
+.review {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.reviewGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 14px;
+  background: tokens.$bg-panel;
+  border: 1px solid tokens.$border-panel;
+
+  .subheading {
+    font-size: 15px;
+  }
+}
+
+.reviewRows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+
+.reviewRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+
+  dt {
+    color: tokens.$text-muted;
+  }
+
+  dd {
+    margin: 0;
+    color: tokens.$text-input;
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+}
+
+.log {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 14px;
+  list-style: none;
+  background: #0b0907;
+  border: 1px solid #3d2f14;
+  font-size: 13px;
+}
+
+.logLine {
+  display: flex;
+  gap: 12px;
+  color: #cdbd99;
+
+  &[data-state='done'] {
+    color: tokens.$success;
+  }
+
+  &[data-state='failed'] {
+    color: tokens.$warning;
+  }
+}
+
+.logTime {
+  flex: 0 0 auto;
+  color: tokens.$border-frame-outer;
+  font-variant-numeric: tabular-nums;
+}
+
+.done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+
+  .actions {
+    align-self: stretch;
+  }
+}
+
+.doneIcon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  color: tokens.$success;
+  border: 1px solid tokens.$success;
+  font-size: 26px;
+  animation: rune-glow 2.4s ease-in-out infinite;
+}
+
+.doneTitle {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 30px;
+  font-weight: 400;
+  word-spacing: 0.3em;
+}
+
+.doneText {
+  max-width: 520px;
+  margin: 0;
+  color: #bfae88;
+
+  strong {
+    color: tokens.$success;
+  }
+}
+
+@keyframes rune-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+// =============================================================================
+// INSTALLER ACTIONS
+// =============================================================================
+
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid tokens.$border-divider;
+}
+
+.action,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 0;
+  cursor: pointer;
+  font:
+    700 14px 'Source Sans 3',
+    sans-serif;
+  text-decoration: none;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: none;
+  }
+}
+
+.action {
+  @include buttons.gold;
+}
+
+.secondaryAction {
+  @include surfaces.control;
+
+  color: tokens.$text-secondary;
+
+  &:hover:not(:disabled) {
+    color: tokens.$text-hover;
+    border-color: tokens.$border-frame;
+  }
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .page {
+    padding: 0 16px 48px;
+  }
+
+  .topBar {
+    margin: 0 -16px;
+    padding: 8px 16px;
+  }
+
+  .lockNotice {
+    display: none;
+  }
+
+  .hero {
+    padding: 36px 0 26px;
+  }
+
+  .rail {
+    gap: 4px;
+  }
+
+  .railStep {
+    justify-content: center;
+    padding: 8px 2px;
+  }
+
+  .railLabel {
+    display: none;
+  }
+
+  .card {
+    padding: 20px 16px;
+  }
+
+  .grid,
+  .checks,
+  .review {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .actions > * {
+    flex: 1 1 auto;
+  }
+}

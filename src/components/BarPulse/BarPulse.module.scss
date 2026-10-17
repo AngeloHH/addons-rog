@@ -1,0 +1,23 @@
+.pulse {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  padding-top: 6px;
+  border-top: 1px solid #2a2114;
+}
+
+// =============================================================================
+// SAMPLE STATES
+// =============================================================================
+
+// Use a muted fill for ordinary samples and a gold gradient for highlighted ones.
+
+.bar {
+  flex: 1;
+  min-width: 0;
+  background: #3d2f14;
+
+  &[data-high='true'] {
+    background: linear-gradient(180deg, #f1d68a, #b8892f);
+  }
+}

@@ -1,0 +1,20 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 48px;
+  text-align: center;
+}
+
+.title {
+  @include typography.title(18px);
+}
+
+.text {
+  color: tokens.$text-muted;
+  font-size: 13px;
+}

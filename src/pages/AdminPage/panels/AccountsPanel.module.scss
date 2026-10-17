@@ -1,0 +1,439 @@
+@use '../../../styles/base/tokens';
+@use '../../../styles/base/typography';
+@use '../../../styles/components/surfaces';
+
+// =============================================================================
+// ACCOUNT COLUMNS
+// =============================================================================
+
+// Share width between the directory and profile; stack them on narrow screens.
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(560px, 100%), 1fr));
+  align-items: start;
+  gap: 20px;
+}
+
+// =============================================================================
+// INVITATION ACTION
+// =============================================================================
+
+// Highlight the toolbar's moderator invitation button in gold.
+
+.invite {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 14px;
+  margin-left: auto;
+  background: linear-gradient(
+    180deg,
+    #f1d68a 0%,
+    #c9a04a 38%,
+    #8e6520 52%,
+    #b8892f 70%,
+    #e0bb62 100%
+  );
+  border: 1px solid #2a2118;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 245, 210, 0.75),
+    inset 0 -1px 0 rgba(60, 35, 5, 0.6),
+    0 0 0 1px #6c6055,
+    0 0 0 2px #1a1612,
+    0 2px 4px rgba(0, 0, 0, 0.6);
+  color: #231806;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 240, 200, 0.4);
+
+  &:hover {
+    filter: brightness(1.06);
+  }
+}
+
+// =============================================================================
+// ACCOUNT DIRECTORY
+// =============================================================================
+
+.head,
+.account {
+  display: grid;
+  grid-template-columns: minmax(200px, 2fr) auto auto auto auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.head {
+  padding: 8px 16px;
+  border-bottom: 1px solid tokens.$border-divider;
+  color: tokens.$border-frame-outer;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+}
+
+// =============================================================================
+// ACCOUNT SELECTION
+// =============================================================================
+
+// Use the whole row as the selection button and mark the selected account at its left edge.
+
+.account {
+  padding: 10px 16px;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid tokens.$border-divider;
+  border-left: 2px solid transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background: #171208;
+  }
+
+  &[data-chosen='true'] {
+    background: #171208;
+    border-left-color: tokens.$accent-muted;
+  }
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  background: var(--avatar-background, #2a2114);
+  border: 1px solid tokens.$border-panel;
+  color: var(--avatar-color, tokens.$text-secondary);
+  font-family: tokens.$font-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.whoText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  overflow: hidden;
+  color: tokens.$text-strong;
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.email {
+  overflow: hidden;
+  color: tokens.$text-muted;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.roleTag {
+  padding: 3px 8px;
+  border: 1px solid var(--role-color, tokens.$text-muted);
+  color: var(--role-color, tokens.$text-muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.uploads {
+  color: tokens.$text-secondary;
+  font-family: tokens.$font-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.seen {
+  color: tokens.$text-subtle;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--status-color, tokens.$text-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--status-color, tokens.$text-muted);
+}
+
+.empty {
+  padding: 36px;
+  color: tokens.$text-muted;
+  font-size: 13px;
+  text-align: center;
+}
+
+// =============================================================================
+// SELECTED ACCOUNT CARD
+// =============================================================================
+
+// Use the shared gold frame for the selected account's details.
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  @include surfaces.framed;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.bigAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  background: var(--avatar-background, #2a2114);
+  border: 1px solid tokens.$border-control;
+  box-shadow:
+    0 0 0 1px #15120e,
+    0 0 0 3px #2a2114;
+  color: var(--avatar-color, tokens.$text-secondary);
+  font-family: tokens.$font-serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.cardName {
+  @include typography.title(18px);
+}
+
+.cardRole {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--role-color, tokens.$text-muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.figures {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 6px;
+  @include surfaces.panel;
+}
+
+.figureValue {
+  color: tokens.$text-heading;
+  font-family: tokens.$font-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.figureLabel {
+  color: tokens.$text-muted;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.threat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.threatHead {
+  display: flex;
+  justify-content: space-between;
+  color: tokens.$text-muted;
+  font-size: 12px;
+}
+
+.threatLabel {
+  font-weight: 600;
+}
+
+.threatBar {
+  height: 6px;
+  background: tokens.$bg-page;
+  border: 1px solid tokens.$border-panel;
+
+  div {
+    height: 100%;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: tokens.$text-secondary;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.select {
+  min-height: 38px;
+  padding: 0 10px;
+  background: #1a1612;
+  border: 1px solid tokens.$border-control;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px #15120e,
+    0 2px 4px rgba(0, 0, 0, 0.6);
+  color: tokens.$text-input;
+  color-scheme: dark;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.button {
+  min-height: 38px;
+  font-size: 13px;
+  cursor: pointer;
+
+  &[data-tone='warning'] {
+    color: tokens.$warning;
+  }
+
+  &[data-tone='ok'] {
+    color: tokens.$success;
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: tokens.$link;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+// =============================================================================
+// RECENT ACCOUNT ACTIVITY
+// =============================================================================
+
+.kicker {
+  @include typography.kicker;
+}
+
+.log {
+  display: flex;
+  flex-direction: column;
+}
+
+.logRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid tokens.$border-divider;
+  color: #cdbd99;
+  font-size: 13px;
+  line-height: 1.45;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.logWhen {
+  color: tokens.$border-frame-outer;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+// =============================================================================
+// MOBILE ACCOUNT DIRECTORY
+// =============================================================================
+
+// Keep the name and role columns on narrow screens.
+
+@media (max-width: tokens.$mobile-max) {
+  .head {
+    display: none;
+  }
+
+  .account {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .uploads,
+  .seen,
+  .status {
+    display: none;
+  }
+}

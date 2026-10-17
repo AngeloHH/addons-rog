@@ -1,0 +1,36 @@
+// =============================================================================
+// SHARED THEME TOKENS
+// =============================================================================
+
+// Shared theme values; importing this file emits no CSS.
+
+$font-sans: 'Source Sans 3', sans-serif;
+$font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+$font-display: 'WoW Plexus', Cinzel, serif;
+$font-serif: Cinzel, serif;
+$font-mono: Consolas, Menlo, monospace;
+$content-width: 1200px;
+$mobile-max: 760px;
+$tablet-min: 761px;
+$tablet-max: 1024px;
+$desktop-min: 1025px;
+
+$text-heading: #ead9ac;
+$text-secondary: #cdb98e;
+$text-muted: #8f7b54;
+$text-subtle: #9d8a63;
+$text-input: #e6d9bd;
+$text-strong: #f0e4c4;
+$text-hover: #f5d98a;
+$accent: #c8a24a;
+$accent-muted: #b8933f;
+$link: #e2bd63;
+$bg-page: #0c0a08;
+$bg-panel: #0f0c08;
+$border-panel: #2f2514;
+$border-divider: #241c10;
+$border-frame: #8c7238;
+$border-frame-outer: #6b5a3a;
+$border-control: #57503f;
+$success: #8fc98a;
+$warning: #e39a6a;

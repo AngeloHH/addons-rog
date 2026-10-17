@@ -1,0 +1,158 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/layout';
+
+.footer {
+  margin-top: auto;
+  background: #080706;
+  border-top: 1px solid #2a2114;
+}
+
+.inner {
+  @include layout.centered;
+  padding: 28px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: tokens.$text-muted;
+  font-size: 13px;
+}
+
+.credits {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  a {
+    color: tokens.$link;
+    text-decoration: none;
+
+    &:hover {
+      color: tokens.$text-hover;
+    }
+  }
+}
+
+.logo {
+  width: auto;
+  height: 32px;
+  opacity: 0.85;
+}
+
+.dot {
+  color: #3a2f1e;
+}
+
+.links {
+  display: flex;
+  gap: 18px;
+
+  a {
+    color: tokens.$text-subtle;
+    text-decoration: none;
+
+    &:hover {
+      color: tokens.$text-hover;
+    }
+  }
+}
+
+.language {
+  position: relative;
+  display: flex;
+}
+
+.languageButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  color: tokens.$text-subtle;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+
+  &:hover {
+    color: tokens.$text-hover;
+  }
+}
+
+.chevron {
+  display: flex;
+  color: tokens.$accent-muted;
+}
+
+.languageMenu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  z-index: 30;
+  min-width: 190px;
+  max-height: 194px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-color: tokens.$border-frame-outer tokens.$bg-page;
+  scrollbar-width: thin;
+  background: linear-gradient(180deg, #1b150c, #120e08);
+  border: 1px solid tokens.$border-frame;
+  box-shadow:
+    0 0 0 1px #17130e,
+    0 0 0 3px #4a4438,
+    0 0 0 4px #1a1612,
+    0 -8px 24px rgba(0, 0, 0, 0.6);
+
+  button {
+    min-height: 36px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    gap: 12px;
+    color: tokens.$text-secondary;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    text-align: left;
+
+    &:hover {
+      color: tokens.$text-hover;
+      background: #2a2114;
+    }
+
+    span:last-child {
+      color: tokens.$text-muted;
+      font-size: 11px;
+    }
+  }
+
+  .activeLanguage {
+    color: tokens.$text-heading;
+    background: #2a2114;
+  }
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .inner {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .links {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 18px;
+  }
+
+  .languageMenu {
+    right: auto;
+    left: 0;
+  }
+}

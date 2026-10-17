@@ -1,0 +1,6 @@
+# Recommended: DocumentRoot must point to public/.
+Options -Indexes
+RewriteEngine On
+RewriteRule ^(?:config|src|database|bin|storage|contracts|tests|docs|templates)(?:/|$) - [F,L,NC]
+RewriteRule ^(?:bootstrap|routes)\.php$ - [F,L,NC]
+RewriteRule ^ public/index.php [QSA,END]

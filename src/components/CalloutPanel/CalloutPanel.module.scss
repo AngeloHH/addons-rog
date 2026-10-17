@@ -1,0 +1,121 @@
+@use '../../styles/base/tokens';
+@use '../../styles/base/typography';
+@use '../../styles/components/surfaces';
+@use '../../styles/components/buttons';
+
+.panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  align-items: center;
+  gap: 32px;
+  padding: 36px 40px;
+  background: linear-gradient(135deg, #1c150a 0%, tokens.$bg-panel 60%);
+  border: 1px solid tokens.$border-frame;
+  box-shadow: surfaces.$frame-shadow;
+
+  // Mirror the image position and text alignment for the right orientation.
+  &[data-orientation='right'] {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+
+    .image {
+      order: 2;
+    }
+
+    .content {
+      order: 1;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .links {
+      justify-content: flex-end;
+    }
+  }
+}
+
+.image {
+  width: 100%;
+  max-width: 300px;
+  justify-self: center;
+  filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.7));
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.subtitle {
+  @include typography.kicker;
+}
+
+.title {
+  margin: 0;
+  color: tokens.$text-heading;
+  font-family: tokens.$font-display;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.15;
+  text-shadow: 0 2px 0 #000;
+  text-transform: uppercase;
+  text-wrap: balance;
+  word-spacing: 0.3em;
+}
+
+.text {
+  margin: 0;
+  color: #bfae88;
+  font-size: 15px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.primary {
+  padding: 12px 22px;
+
+  @include buttons.gold;
+}
+
+.secondary {
+  padding: 12px 22px;
+  @include surfaces.control;
+  color: #e8d39a;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    border-color: tokens.$accent;
+  }
+}
+
+@media (max-width: tokens.$mobile-max) {
+  .panel,
+  .panel[data-orientation='right'] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .panel[data-orientation='right'] .image {
+    order: 0;
+  }
+
+  .panel[data-orientation='right'] .content {
+    order: 0;
+  }
+
+  .links a {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+}
